@@ -1,6 +1,17 @@
+#include <stdlib.h>
 #include <stdio.h>
 
-int main(void) {
-	/* Copy the line after this comment. */
-		return 0;
+// the main function
+int main(){
+    int a;
+    printf("Hello there!\n");
+
+    a = 12;
+    printf("a=%d\n", a);
+
+    a = 13;
+    printf("a=%d\n", a);
+    return 0;
 }
+
+main(); // call the main function
