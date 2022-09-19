@@ -14,4 +14,4 @@ int main(){
     return 0;
 }
 
-main(); // call the main function
+int main(); // call the main function
