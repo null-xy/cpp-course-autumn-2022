@@ -21,10 +21,18 @@ will need to actually calculate the area and circumference.
 #include "rectangle.hpp"
 
 #include <iostream>
-
+//#include <cmath>
 // Write you function here and test it with the main.
 
 void Rectangle() {
-    
+    float width;
+    float height;
+    std::cout << "Please enter width and height" << std::endl;
+    std::cin >> width;
+    std::cin >> height;
+    float area =width*height;
+    float circumference= 2*(width+height);
+    std::cout << "Area: " << area << std::endl
+    << "Circumference: " << circumference << std::endl;
 }
 
