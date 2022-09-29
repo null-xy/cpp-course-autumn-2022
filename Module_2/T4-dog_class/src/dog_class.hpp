@@ -8,8 +8,8 @@
  *
  */
 class Dog {
-  
-  Dog(int age, std::string name);
+public:
+  Dog(const int age, const std::string& name);
 
   void SetAge(int age);
   int GetAge();
@@ -19,6 +19,6 @@ class Dog {
  private:
   int age_;
   std::string name_;
-} 
+};
 
 #endif

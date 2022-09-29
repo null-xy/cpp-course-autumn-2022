@@ -8,11 +8,18 @@
  * \param a age of the dog
  * \param n name of the dog
  */
-
-  Dog(int a, string n) { 
+/*Dog dog(const int &a,const std::string& n) {
+  int age_ = a; 
+  std::string name_ = n; 
+}*/
+Dog::Dog(const int a, const std::string& n) {
+    age_ = a;
+    name_ = n;
+}
+/*Dog(int a, string n) { 
   age_ = a; 
   name_ = n; 
-}
+}*/
 
 /**
  * \brief Sets the age of the dog
@@ -20,7 +27,7 @@
  * \param a The age of the dog
  */
 
-  Dog::setAge(int a) {
+  void Dog::SetAge(int a) {
       age_ = a; 
 }
 
@@ -30,7 +37,7 @@
  * \return The age of the dog
  */
 
-  Dog::GetAge() {
+  int Dog::GetAge() {
       return age_; 
 }
 
@@ -40,7 +47,7 @@
  * \param n The name of the dog
  */
 
-  Dog::setName(string n) {
+void Dog::SetName(std::string n) {
       name_ = n; 
 }
 
@@ -50,6 +57,6 @@
  * \return The name of the dog as std::string
  */
 
-  Dog::getName() {
+std::string Dog::GetName(){
       return name_; 
 }
