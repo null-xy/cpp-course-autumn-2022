@@ -5,6 +5,10 @@
 #include <string>
 
 void Adder(std::vector<std::string>& names) {
+  std::string inputname;
+  std::cout << "Enter a name:" << std::endl;
+  std::cin >> inputname;
+  names.push_back(inputname);
   std::cout << "Number of names in the vector:" << std::endl
   << names.size() << std::endl;
 }
@@ -16,7 +20,7 @@ void Remover(std::vector<std::string>& names) {
 }
 
 void Printer(std::vector<std::string>& names) {
-      for(int i = 0; i< names.size(); ++i) {
+      for(unsigned i = 0; i< names.size(); ++i) {
         std::cout << names[i] << std::endl;
     }
 }
@@ -24,7 +28,6 @@ void Printer(std::vector<std::string>& names) {
 void CMDReader() {
   std::string cmd;
   cmd="default";
-  std::string inputname;
   std::vector<std::string> v;
 
   std::cout << "Commands: ADD, PRINT, REMOVE, QUIT"
@@ -37,9 +40,6 @@ void CMDReader() {
     if (cmd == "QUIT" ){
       break;
     }else if(cmd=="ADD"){
-      std::cout << "Enter a name:" << std::endl;
-      std::cin >> inputname;
-      v.push_back(inputname);
       Adder(v);
     }else if(cmd=="PRINT"){
       Printer(v);
