@@ -9,8 +9,8 @@
 // Assumes 'm' is a square matrix
 Matrix ReadMatrix(int n) {
   std::vector<std::vector<int>> m(n,std::vector<int>(n));
-  for(unsigned i = 0; i < n; i++){
-    for(unsigned j = 0; j < n; j++){
+  for(int i = 0; i < n; i++){
+    for(int j = 0; j < n; j++){
       std::cin >>m[i][j];
     }
   }
@@ -20,8 +20,8 @@ Matrix ReadMatrix(int n) {
 Matrix Rotate90Deg(const Matrix &m) {
   int n=m.size();
   std::vector<std::vector<int>> m_new(n,std::vector<int>(n));
-  for(unsigned i = 0; i < n; i++){
-    for(unsigned j = 0; j < n; j++){
+  for(int i = 0; i < n; i++){
+    for(int j = 0; j < n; j++){
       m_new[i][j] = m[n-1-j][i];
     }
   }
@@ -31,9 +31,9 @@ Matrix Rotate90Deg(const Matrix &m) {
 void Print(const Matrix &m) {
   int n=m.size();
   std::cout << "Printing out a "<< n <<" x "<< n <<" matrix:" << std::endl;
-    for(unsigned i = 0; i < n; i++)
+    for(int i = 0; i < n; i++)
     {
-        for(unsigned j = 0; j < n; j++){
+        for(int j = 0; j < n; j++){
           std::cout << m[i][j] << " ";
         }
         std::cout << std::endl;
