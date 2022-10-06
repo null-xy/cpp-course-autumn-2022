@@ -17,6 +17,7 @@ set(SOURCES ${SOURCES_C} ${SOURCES_CPP})
 message(STATUS "SRC directory source code files: \n\t-- C SOURCES: ${SOURCES_C}\n\t-- CPP SOURCE:${SOURCES_CPP}\n\t-- ALL:${SOURCES}")
 # add the executable target
 add_executable(T2-list)
+set(CMAKE_BUILD_TYPE Debug)
 
 target_sources(T2-list PUBLIC ${SOURCES})
 target_include_directories(T2-list PUBLIC .)
