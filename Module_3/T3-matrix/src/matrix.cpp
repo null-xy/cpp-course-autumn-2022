@@ -20,12 +20,9 @@ Matrix ReadMatrix(int n) {
 Matrix Rotate90Deg(const Matrix &m) {
   int n=m.size();
   std::vector<std::vector<int>> m_new(n,std::vector<int>(n));
-  for(unsigned i = 0; i < n/2; i++){
-    for(unsigned j = i; j < n-i-1; j++){
-      m_new[i][j]=m[n-1-j][i];
-      m_new[n-1-j][i]=m[n-1-i][n-1-j];
-      m_new[n-1-i][n-1-j]=m[j][n-1-i];
-      m_new[j][n-1-i]=m[i][j];
+  for(unsigned i = 0; i < n; i++){
+    for(unsigned j = 0; j < n; j++){
+      m_new[i][j] = m[n-1-j][i];
     }
   }
   return m_new;
