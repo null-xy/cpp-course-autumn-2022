@@ -1,13 +1,7 @@
 #include "pokemon.hpp"
 #include <algorithm>
 
-/*Book::Book(std::string const& name, std::string const& author,std::string const& isbn,
-  bool loaned, struct Date due_date):
-  name_(name),author_(author),isbn_(isbn),loaned_(loaned),due_date_(due_date){};
-undefined reference to `PokemonCollection::PokemonCollection(PokemonCollection, PokemonCollection)
-*/
-
-PokemonCollection::PokemonCollection(PokemonCollection& collection,PokemonCollection& collection2){
+PokemonCollection::PokemonCollection(PokemonCollection collection,PokemonCollection collection2){
     collection.pokemons_.sort();
     collection.pokemons_.unique();
     collection2.pokemons_.sort();
@@ -31,16 +25,8 @@ void PokemonCollection::Print() const{
         <<", name: "<<it ->first<< std::endl;
     }
 }
-//  std::list<std::pair<std::string, size_t>> pokemons_;
+
 void PokemonCollection::SortByName(){
-    /*
-    std::sort(pokemons_.begin(), pokemons_.end(), 
-    [](const std::pair<std::string, size_t> &x,
-    const std::pair<std::string, size_t> &y)
-{
-    //return x.first < y.first;
-});
-*/
     pokemons_.sort([](auto const& a, auto const& b) {
         return a.first > b.first;
 });
