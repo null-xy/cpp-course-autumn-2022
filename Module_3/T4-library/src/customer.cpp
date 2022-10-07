@@ -21,14 +21,16 @@ bool Customer::LoanBook(Book& b){
     }
 }
 void Customer::ReturnBook(Book& b){
-    b.Restore();
-    for (std::vector<Book>::const_iterator it = books_.begin(); it != books_.end(); it++) {
-    Book book=*it;
+    if(b.GetStatus()){
+        b.Restore();
+        for (std::vector<Book>::const_iterator it = books_.begin(); it != books_.end(); it++) {
+            Book book=*it;
     if (book.GetName()==b.GetName())
     {
         books_.erase(it);
     }
   }
+    }
 }
 void Customer::Print() const{
     std::cout << "Customer: " <<name_
@@ -37,7 +39,7 @@ void Customer::Print() const{
     <<" books on loan:"<< std::endl;
     for (std::vector<Book>::const_iterator it = books_.begin(); it != books_.end(); it++) {
     Book book=*it;
-    std::cout <<"- ";
+    //std::cout <<"- ";
     book.Print();
     }
 }
