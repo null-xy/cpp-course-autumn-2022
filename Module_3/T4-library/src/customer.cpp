@@ -25,14 +25,8 @@ bool Customer::LoanBook(Book& b){
 void Customer::ReturnBook(Book& b){
     if(b.GetStatus()){
         b.Restore();
-        books_.erase(std::remove_if(books_.begin(), books_.end(), [b](Book& i) { return i.GetName() == b.GetName(); }), books_.end());
-        /*for (std::vector<Book>::const_iterator it = books_.begin(); it != books_.end(); it++) {
-            Book book=*it;
-            if (book.GetName()==b.GetName()){
-                books_.erase(it);
-            }
-        }*/
-        //books_.erase(std::remove(books_.begin(), books_.end(), b), books_.end());
+        books_.erase(std::remove_if(books_.begin(), books_.end(), [b](Book& i) 
+        { return i.GetName() == b.GetName(); }), books_.end());
     }
 }
 
@@ -42,29 +36,7 @@ void Customer::Print() const{
     <<", has "<<books_.size()
     <<" books on loan:"<< std::endl;
     for(auto i:books_){
+        std::cout <<"- ";
         i.Print();
     }
-    /*for (std::vector<Book>::const_iterator it = books_.begin(); it != books_.end(); it++) {
-    Book book=*it;
-    std::cout <<"- Book: "<<book.GetName() 
-    <<", author: "<<book.GetAuthor()
-    <<", ISBN: "<<book.GetISBN()
-    <<", loaned "<<std::boolalpha << book.GetStatus()
-    <<", due date: " << book.GetDueDate().day<<"."<<book.GetDueDate().month<<"."<<book.GetDueDate().year
-    << std::endl;
-    book.Print();
-    }*/
 }
-  /**
-   *
-   *
-   * The output format should be like the following (for 2 loans):
-   *
-   * Customer: <name>, <customer_id>, has <number_of_loans> books on loan:\n
-   * - Book: <name>, author: <author>, ISBN: <isbn>, loaned <true/false>, due
-   * date: <day>.<month>.<year>\n
-   * - Book: <name>, author: <author>, ISBN: <isbn>, loaned <true/false>, due
-   * date: <day>.<month>.<year>\n
-   *
-   * (Book details must be printed on a single line)
-   */
