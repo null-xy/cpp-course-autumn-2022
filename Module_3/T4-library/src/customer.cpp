@@ -1,5 +1,6 @@
 #include "customer.hpp"
 #include <iostream>
+#include <algorithm>
 
 Customer::Customer(std::string const& name, std::string const& id):name_(name),id_(id){};
 std::string Customer::GetName() const{
@@ -24,15 +25,17 @@ bool Customer::LoanBook(Book& b){
 void Customer::ReturnBook(Book& b){
     if(b.GetStatus()){
         b.Restore();
-        for (std::vector<Book>::const_iterator it = books_.begin(); it != books_.end(); it++) {
+        books_.erase(std::remove_if(books_.begin(), books_.end(), [b](Book& i) { return i.GetName() == b.GetName(); }), books_.end());
+        /*for (std::vector<Book>::const_iterator it = books_.begin(); it != books_.end(); it++) {
             Book book=*it;
-    if (book.GetName()==b.GetName())
-    {
-        books_.erase(it);
-    }
-  }
+            if (book.GetName()==b.GetName()){
+                books_.erase(it);
+            }
+        }*/
+        //books_.erase(std::remove(books_.begin(), books_.end(), b), books_.end());
     }
 }
+
 void Customer::Print() const{
     std::cout << "Customer: " <<name_
     <<", "<<id_
