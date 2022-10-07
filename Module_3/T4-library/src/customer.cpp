@@ -18,7 +18,8 @@ bool Customer::LoanBook(Book& b){
     if(!b.GetStatus()){
     b.Loan();
     books_.push_back(b);
-    }
+    return true;
+    }else return false;
 }
 void Customer::ReturnBook(Book& b){
     if(b.GetStatus()){
@@ -39,7 +40,25 @@ void Customer::Print() const{
     <<" books on loan:"<< std::endl;
     for (std::vector<Book>::const_iterator it = books_.begin(); it != books_.end(); it++) {
     Book book=*it;
-    //std::cout <<"- ";
-    book.Print();
+    std::cout <<"- Book: "<<book.GetName() 
+    <<", author: "<<book.GetAuthor()
+    <<", ISBN: "<<book.GetISBN()
+    <<", loaned "<<std::boolalpha << book.GetStatus()
+    <<", due date: " << book.GetDueDate().day<<"."<<book.GetDueDate().month<<"."<<book.GetDueDate().year
+    << std::endl;
+    //book.Print();
     }
 }
+  /**
+   *
+   *
+   * The output format should be like the following (for 2 loans):
+   *
+   * Customer: <name>, <customer_id>, has <number_of_loans> books on loan:\n
+   * - Book: <name>, author: <author>, ISBN: <isbn>, loaned <true/false>, due
+   * date: <day>.<month>.<year>\n
+   * - Book: <name>, author: <author>, ISBN: <isbn>, loaned <true/false>, due
+   * date: <day>.<month>.<year>\n
+   *
+   * (Book details must be printed on a single line)
+   */
