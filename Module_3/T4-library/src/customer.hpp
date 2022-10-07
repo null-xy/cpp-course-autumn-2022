@@ -14,7 +14,7 @@ class Customer {
    * \param name the customer's name (reference to const string)
    * \param id the customer number (reference to const string)
    */
-  
+  Customer(std::string const& name, std::string const& id);
 
   /**
    * \brief Get the Customer's name as a string, takes no parameters.
@@ -26,7 +26,7 @@ class Customer {
    *
    * \return std::string
    */
-  
+  std::string GetName() const;
 
   /**
    * \brief Get the Customer's customer number as a string, takes no
@@ -39,7 +39,7 @@ class Customer {
    *
    * \return std::string
    */
-  
+  std::string GetID() const;
 
   /**
    * \brief Get the Customer's number of loans as an int, takes no parameters.
@@ -51,7 +51,7 @@ class Customer {
    *
    * \return int
    */
-  
+  int GetLoanAmount() const;
 
   /**
    * \brief Get the Customer's loans as a vector<Book>, takes no parameters.
@@ -63,7 +63,7 @@ class Customer {
    *
    * \return std::vector<Book>
    */
-  
+  std::vector<Book> GetLoans() const;
 
   /**
    * \brief loans a book for the customer
@@ -74,7 +74,7 @@ class Customer {
    *
    * \return  the result of loaning (from Book::loan function).
    */
-  
+  bool LoanBook(Book& b);
 
   /**
    * \brief Returns a book loaned by the customer. The function returns
@@ -84,7 +84,7 @@ class Customer {
    *
    * \param b a reference to a book
    */
-  
+  void ReturnBook(Book& b);
 
   /**
    * \brief write the customer's information to the standard output stream.
@@ -106,7 +106,7 @@ class Customer {
    *
    * (Book details must be printed on a single line)
    */
-  
+  void Print() const;
 
  private:
   /* Member variables:
@@ -114,7 +114,9 @@ class Customer {
    * customer id (string)
    * vector of loaned books (vector<Book>)
    */
-  
+  std::string name_;
+  std::string id_;
+  std::vector<Book> books_;
 };
 
 #endif
