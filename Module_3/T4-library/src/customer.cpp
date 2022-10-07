@@ -38,16 +38,19 @@ void Customer::Print() const{
     <<", "<<id_
     <<", has "<<books_.size()
     <<" books on loan:"<< std::endl;
-    for (std::vector<Book>::const_iterator it = books_.begin(); it != books_.end(); it++) {
+    for(auto i:books_){
+        i.Print();
+    }
+    /*for (std::vector<Book>::const_iterator it = books_.begin(); it != books_.end(); it++) {
     Book book=*it;
-    /*std::cout <<"- Book: "<<book.GetName() 
+    std::cout <<"- Book: "<<book.GetName() 
     <<", author: "<<book.GetAuthor()
     <<", ISBN: "<<book.GetISBN()
     <<", loaned "<<std::boolalpha << book.GetStatus()
     <<", due date: " << book.GetDueDate().day<<"."<<book.GetDueDate().month<<"."<<book.GetDueDate().year
-    << std::endl;*/
+    << std::endl;
     book.Print();
-    }
+    }*/
 }
   /**
    *
