@@ -13,10 +13,13 @@ void PokemonCollection::Add(const std::string& name, size_t id){
 }
 
 bool PokemonCollection::Remove(const std::string& name, size_t id){
+    /*
     auto newEnd = std::remove_if(pokemons_.begin(), pokemons_.end(), [name,id](const auto& i) {
     return (i.first == name && i.second==id);});
     pokemons_.erase(newEnd, pokemons_.end());
-    return true;
+    return true;*/
+    pokemons_.erase(std::remove_if(pokemons_.begin(), pokemons_.end(), [name,id](const auto& i) 
+        { return (i.first == name && i.second==id); }), pokemons_.end());
 }
 
 void PokemonCollection::Print() const{
@@ -33,6 +36,6 @@ void PokemonCollection::SortByName(){
 }
 void PokemonCollection::SortById(){
     pokemons_.sort([](auto const& a, auto const& b) {
-        return a.second > b.second;
-});
+        return a.second < b.second;
+    });
 }
