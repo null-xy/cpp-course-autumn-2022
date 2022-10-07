@@ -5,6 +5,8 @@ PokemonCollection::PokemonCollection(PokemonCollection collection,PokemonCollect
 {
     pokemons_=collection.pokemons_;
     pokemons_.merge(collection2.pokemons_);
+    pokemons_.sort();
+    pokemons_.unique();
 }
 
 void PokemonCollection::Add(const std::string& name, size_t id){
