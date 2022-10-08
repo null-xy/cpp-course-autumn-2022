@@ -14,21 +14,17 @@ void PokemonCollection::Add(const std::string& name, size_t id){
 }
 
 bool PokemonCollection::Remove(const std::string& name, size_t id){
-/*for (std::list<std::pair<std::string, size_t>>::const_iterator it = pokemons_.begin(); it != pokemons_.end(); it++) {
-        Customer customer_loop=*it;
-        if(customer_loop.GetID()==id){
-            customer=*it;
-        }
-    }
-*/
-    auto it = std::remove_if(pokemons_.begin(), pokemons_.end(), [name,id](const auto& i) 
+    std::list<std::pair<std::string, size_t>>::const_iterator 
+    it = std::find_if(pokemons_.begin(), pokemons_.end(), [name,id](const auto& i) 
         { return (i.first == name && i.second==id); });
+    /*auto it = std::remove_if(pokemons_.begin(), pokemons_.end(), [name,id](const auto& i) 
+        { return (i.first == name && i.second==id); });pokemons_.erase(it, pokemons_.end());//remove all
     //pokemons_.erase(std::remove_if(pokemons_.begin(), pokemons_.end(), [name,id](const auto& i) 
     //    { return (i.first == name && i.second==id); }), pokemons_.end());
+    */
     if (it != pokemons_.end()){
-        pokemons_.erase(it, pokemons_.end());
+        pokemons_.erase(it);
         return true;
-   
     }
     else{
         return false;
