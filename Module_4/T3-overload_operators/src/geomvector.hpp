@@ -53,7 +53,7 @@ class GeomVector {
    */
   friend std::ostream& operator<<(std::ostream& out, const GeomVector& a);
 
-  friend GeomVector operator/(const GeomVector& b, int a);
+  friend GeomVector operator/(const GeomVector& b, double a);
   friend bool operator>(const GeomVector& a, const GeomVector& b);
   friend bool operator<(const GeomVector& a, const GeomVector& b);
   friend bool operator==(const GeomVector& a, const GeomVector& b);
