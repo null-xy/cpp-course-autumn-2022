@@ -14,7 +14,6 @@
 class Aviary {
  public:
   Aviary() {}
-
   /**
    * \brief TODO: method Add adds the given bird to the aviary.
    *
@@ -77,7 +76,8 @@ class Aviary {
    private:
   // TODO: declare the required members
   std::vector<Bird*> aviary_;
-  
+  Aviary(const Aviary&);
+  Aviary& operator=(const Aviary&);
 };
 
 #endif
