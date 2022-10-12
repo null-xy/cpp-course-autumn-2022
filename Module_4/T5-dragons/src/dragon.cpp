@@ -13,12 +13,9 @@ std::ostream &operator<<(std::ostream& out, const Dragon& dragon)
     <<", age: "<< dragon.GetAge()
     <<", size: "<< dragon.GetSize()<< std::endl
     <<"Treasures:"<<std::endl;
-    auto newend=dragon.GetTreasures().end();
-    newend--;
-    for(auto it = dragon.GetTreasures().begin();it != newend;it++ ){
+    for(auto it = dragon.GetTreasures().begin();it != dragon.GetTreasures().end();it++ ){
         out<< it->name<<std::endl;
     }
-    //out<< dragon.GetTreasures().end()->name;
-    out<< newend->name;
+
     return out;
 }
