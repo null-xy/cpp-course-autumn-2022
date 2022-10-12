@@ -14,7 +14,7 @@ void DragonCave::Accommodate(Dragon* dragon){
     dragons_.push_back(dragon);
 }
 std::ostream &operator<<(std::ostream& out, const DragonCave& cave){
-    out<<"DragonCave dwellers:"<<std::endl<<std::endl;
+    out<<"DragonCave dwellers:"<<std::endl;
     //auto newend=dragon.GetTreasures().end();
     //newend--;
     for(auto it : cave.GetDragons()){
