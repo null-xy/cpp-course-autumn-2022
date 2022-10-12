@@ -5,21 +5,21 @@
 FantasyDragon::FantasyDragon(const std::string& name,size_t age, size_t size) : Dragon(name,age,size){}
 
 void FantasyDragon::Eat(std::list<Food>& food) {
-    auto it = std::find_if(food.begin(), food.end(), [](const auto& i) 
-        { return (i.type == FoodType::People || i.type == FoodType::PeopleFood); });
-        if((it != food.end())){
+    for(std::list<Food>::iterator it = food.begin(); it != food.end();it++){
+        if((*it).type==FoodType::People || (*it).type == FoodType::PeopleFood){
             std::cout <<"Fantasy dragon ate: "<<(*it).name<<std::endl;
-            food.erase(it);
+            it=food.erase(it);
             this->size_=this->size_+1;
         }
+    }
  }
 void FantasyDragon::Hoard(std::list<Treasure>& treasure) {
-    //treasures_.splice(treasures_.end(), treasure);
-    auto it = std::find_if(treasure.begin(), treasure.end(), [](const auto& i) 
-    { return (i.type == TreasureType::Jewellery); });
-    if((it != treasure.end())){
-        std::cout <<"Fantasy dragon received: "<<(*it).name<<std::endl;
-        this->treasures_.push_back(*it);
-        treasure.erase(it);
+    for(std::list<Treasure>::iterator it = treasure.begin(); it != treasure.end();it++){
+        if((*it).type==TreasureType::Jewellery){
+            std::cout <<"Fantasy dragon received: "<<(*it).name<<std::endl;
+            this->treasures_.push_back(*it);
+            it=treasure.erase(it);
         }
+    }
+    
  }
