@@ -75,4 +75,6 @@ class DragonCave{
     void Evict(const std::string& name);
     private:
     std::list<Dragon*> dragons_;
+    DragonCave(const DragonCave&);
+    DragonCave& operator=(const DragonCave&);
 };
