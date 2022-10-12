@@ -88,3 +88,25 @@ additional
  * \return The output stream given as one of the arguments.
  *
  */
+class Dragon{
+  public:
+  Dragon(const std::string& name, size_t age, size_t size);
+  
+  virtual ~Dragon(){}
+  Dragon(const Dragon& d);
+  Dragon& operator=(const Dragon& d);
+  const std::string& GetName() const;
+  size_t GetAge() const;
+  size_t GetSize() const;
+  const std::list<Treasure>& GetTreasures() const;
+
+  virtual void Eat(std::list<Food>& food)  = 0;
+  virtual void Hoard(std::list<Treasure>& treasure)  = 0;
+  friend std::ostream &operator<<(std::ostream& out, const Dragon& dragon);
+
+  protected:
+  std::string name_;
+  size_t age_;
+  size_t size_;
+  std::list<Treasure> treasures_;
+};

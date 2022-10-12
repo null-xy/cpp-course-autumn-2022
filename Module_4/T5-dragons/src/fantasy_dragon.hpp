@@ -39,4 +39,9 @@ Fantasy dragon received: <Treasure's name>\n
 end.
  *
  */
-
+class FantasyDragon : public Dragon{
+    public:
+    FantasyDragon(const std::string& name,size_t age, size_t size);
+    virtual void Eat(std::list<Food>& food) ;
+    virtual void Hoard(std::list<Treasure>& treasure) ;
+};
