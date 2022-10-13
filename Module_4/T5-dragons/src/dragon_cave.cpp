@@ -7,7 +7,7 @@ DragonCave::~DragonCave(){
         delete it;
     }
 }
-const std::list<Dragon*> DragonCave::GetDragons() const{
+const std::list<Dragon*>& DragonCave::GetDragons() const{
     return this->dragons_;
 }
 void DragonCave::Accommodate(Dragon* dragon){
@@ -17,11 +17,13 @@ std::ostream &operator<<(std::ostream& out, const DragonCave& cave){
     out<<"DragonCave dwellers:"<<std::endl;
     //auto newend=dragon.GetTreasures().end();
     //newend--;
-    for(auto it = cave.GetDragons().begin(); it !=cave.GetDragons().end(); it++){
-    //for(auto it : cave.GetDragons()){ 
-    /*causes valgrind error: The list returned by GetDragons doesn't get stored anywhere 
+    //for(auto it = cave.GetDragons().begin(); it !=cave.GetDragons().end(); it++){
+    for(auto it : cave.GetDragons()){ 
+    /**
+    * causes valgrind error: The list returned by GetDragons doesn't get stored anywhere 
     * and gets destroyed immediately. 
     * When the test then uses *it* it's accessing the destroyed list. 
+    * change std::list<Dragon*> into std::list<Dragon*>&
     */
         out<<std::endl<< *it;
     }

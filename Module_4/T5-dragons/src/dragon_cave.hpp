@@ -69,7 +69,7 @@ class DragonCave{
     public:
     DragonCave(){}
     ~DragonCave();
-    const std::list<Dragon*> GetDragons() const;
+    const std::list<Dragon*>& GetDragons() const;
     void Accommodate(Dragon* dragon);
     friend std::ostream &operator<<(std::ostream& out, const DragonCave& cave);
     void Evict(const std::string& name);
