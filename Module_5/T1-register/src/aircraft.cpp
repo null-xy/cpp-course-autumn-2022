@@ -13,7 +13,7 @@ void Aircraft::Write(std::ostream &stream){
     <<this->GetOwner()<<";"
     <<model_<<";"
     <<wingspan_<<";"
-    <<cruise_speed_<<";"<< std::endl;
+    <<cruise_speed_<< std::endl;
     //stream.write(reinterpret_cast<char*>(&name_), sizeof name_);
 }
 
@@ -23,7 +23,7 @@ void Aircraft::Print(){
     <<this->GetOwner()<<";"
     <<model_<<";"
     <<wingspan_<<";"
-    <<cruise_speed_<<";"
+    <<cruise_speed_
     <<std::endl;
 }
 

@@ -14,7 +14,7 @@ void Boat::Write(std::ostream &stream){
     <<this->GetOwner()<<";"
     <<name_<<";"
     <<draft_<<";"
-    <<power_<<";"<< std::endl;
+    <<power_<< std::endl;
     //stream.write(reinterpret_cast<char*>(&name_), sizeof name_);
 }
 void Boat::Print(){
@@ -23,7 +23,7 @@ void Boat::Print(){
     <<this->GetOwner()<<";"
     <<name_<<";"
     <<draft_<<";"
-    <<power_<<";"
+    <<power_
     <<std::endl;
 }
 Boat *Boat::Read(std::istream &stream){
