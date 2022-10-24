@@ -51,10 +51,10 @@ int Register::Load(const std::string& filename){
         return -1;
     }else{
         std::string line;
-        int cnt_lines=0;
+        //int cnt_lines=0;
         while (!is.eof() && std::getline(is, line))
         {
-            cnt_lines++;
+            //cnt_lines++;
             std::vector<std::string> str_v;
             std::string str;
             std::istringstream iss(line);
@@ -64,7 +64,8 @@ int Register::Load(const std::string& filename){
             //iss>> line;
             //ReadLine(iss);
         }
-        return cnt_lines;
+        return vehicles_.size();
+        //return cnt_lines;
     }
 }
 

@@ -8,7 +8,7 @@ Aircraft::Aircraft(std::string register_number, std::string owner, std::string m
 : Vehicle(register_number,owner),model_(model),wingspan_(wingspan),cruise_speed_(cruise_speed){}
 
 void Aircraft::Write(std::ostream &stream){
-    stream<<"B;"
+    stream<<"A;"
     <<this->GetRegisterNumber()<<";"
     <<this->GetOwner()<<";"
     <<model_<<";"
