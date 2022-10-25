@@ -51,21 +51,19 @@ int Register::Load(const std::string& filename){
         return -1;
     }else{
         std::string line;
-        //int cnt_lines=0;
+        int cnt_lines=0;
         while (!is.eof() && std::getline(is, line))
         {
-            //cnt_lines++;
             std::vector<std::string> str_v;
             std::string str;
             std::istringstream iss(line);
-            this->ReadLine(iss);
-            //std::getline(is, line);
-            //std::istream iss(line);
-            //iss>> line;
-            //ReadLine(iss);
+            //this->ReadLine(iss);
+            if(this->ReadLine(iss)){
+                cnt_lines++;
+            }
         }
-        return vehicles_.size();
-        //return cnt_lines;
+        //return vehicles_.size();
+        return cnt_lines;
     }
 }
 
