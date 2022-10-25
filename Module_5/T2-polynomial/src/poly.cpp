@@ -72,7 +72,9 @@ std::ostream& operator<<(std::ostream& os, const Poly& p){
         return a.first > b.first;
         });
     auto newbegin=pair_sort.cbegin();
-    os<< (*newbegin).second << "x" << (*newbegin).first;
+    if((*newbegin).second!=0){
+        os<< (*newbegin).second << "x" << (*newbegin).first;
+    }
     newbegin++;
     for (auto it = newbegin; it != pair_sort.cend(); ++it){
         if((*it).second>0){
