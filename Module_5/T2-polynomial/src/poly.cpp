@@ -4,19 +4,38 @@
 #include <list>
 #include <iostream>
 #include <vector>
+#include <map>
+
 int Poly::operator[](int exp) const {
     auto it = values_.find(exp);
     return it == values_.end() ? 0 : it->second;
 }
 
 Poly& Poly::operator+=(const Poly& b){
-    //values_.
+    std::pair<std::map<int,int>::iterator,bool> ret;
+    for (auto it = b.values_.cbegin(); it!=b.values_.cend(); it++)
+    {
+        ret=values_.insert(std::pair<int,int>((*it).first,(*it).second));
+        if(ret.second==false){
+            values_[(*it).first]=values_[(*it).first]+(*it).second;
+        }
+    }
+    return *this;
 }
-Poly& Poly::operator-=(const Poly& b){
 
+Poly& Poly::operator-=(const Poly& b){
+    std::pair<std::map<int,int>::iterator,bool> ret;
+    Poly sub_b = -b;
+    for (auto it = sub_b.values_.cbegin(); it!=sub_b.values_.cend(); it++)
+    {
+        ret=values_.insert(std::pair<int,int>((*it).first,(*it).second));
+        if(ret.second==false){
+            values_[(*it).first]=values_[(*it).first]+(*it).second;
+        }
+    }
+    return *this;
 }
 std::istream& operator>>(std::istream& is, Poly& p){
-    //20x2+10x1+5x0  -1x2+3x4+2x-2+5x2
     std::string line;
     //read is
     if(!(is>>line)){
@@ -27,15 +46,24 @@ std::istream& operator>>(std::istream& is, Poly& p){
                 if(!(line[i]=='-')){
                     line[i]=' ';
                 }
+                //-1 2 3 4 2 -2 5 2
+                //-1x2+3x4+2x-2+5x2
             }
         }
         std::stringstream iss(line);
         int a,b;
+        std::map<int, int> tmpmap;
+        std::pair<std::map<int,int>::iterator,bool> ret;
         while (iss>>a && iss>>b)
         {
-            p[b]=a;
+            ret = tmpmap.insert(std::pair<int,int>(b,a));
+            if(ret.second==false){
+                p[b]=p[b]+a;
+            }else{
+                p[b]=a;
+            }
         }
-        return iss;
+        return is;
     }
 }
 std::ostream& operator<<(std::ostream& os, const Poly& p){
@@ -56,10 +84,14 @@ std::ostream& operator<<(std::ostream& os, const Poly& p){
     return os;
 }
 Poly operator+(const Poly& a, const Poly& b){
-
+    Poly new_p(a);
+    new_p +=b;
+    return new_p;
 }
 Poly operator-(const Poly& a, const Poly& b){
-
+    Poly new_p(a);
+    new_p -=b;
+    return new_p;
 }
 Poly operator-(const Poly& p){
     //std::map<int, int>::iterator it=p.find
@@ -71,14 +103,52 @@ Poly operator-(const Poly& p){
 }
 
 bool operator<(const Poly& a, const Poly& b){
-
+    int defalut,a_max,b_max;
+    for (auto it = a.begin(); it != a.end(); it++)
+    {
+        defalut=it->first;
+        if(defalut>=a_max){
+            a_max=defalut;
+        }
+    }
+    for (auto it = b.begin(); it != b.end(); it++)
+    {
+        defalut=it->first;
+        if(defalut>=b_max){
+            b_max=defalut;
+        }
+    }
+    if(a_max<b_max){
+        return true;
+    }else{
+        return false;
+    }
 }
 bool operator==(const Poly& a, const Poly& b){
-
+    return (std::equal(a.begin(), a.end(),b.begin()));
 }
 bool operator>(const Poly& a, const Poly& b){
-
+    int defalut,a_max,b_max;
+    for (auto it = a.begin(); it != a.end(); it++)
+    {
+        defalut=it->first;
+        if(defalut>=a_max){
+            a_max=defalut;
+        }
+    }
+    for (auto it = b.begin(); it != b.end(); it++)
+    {
+        defalut=it->first;
+        if(defalut>=b_max){
+            b_max=defalut;
+        }
+    }
+    if(a_max>b_max){
+        return true;
+    }else{
+        return false;
+    }
 }
 bool operator!=(const Poly& a, const Poly& b){
-    
+    return !(std::equal(a.begin(), a.end(),b.begin()));
 }
