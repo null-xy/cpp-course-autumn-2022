@@ -75,9 +75,9 @@ std::ostream& operator<<(std::ostream& os, const Poly& p){
     os<< (*newbegin).second << "x" << (*newbegin).first;
     newbegin++;
     for (auto it = newbegin; it != pair_sort.cend(); ++it){
-        if((*it).second>=0){
+        if((*it).second>0){
             os<<"+"<< (*it).second << "x" << (*it).first;
-        }else{
+        }else if((*it).second<0){
             os<< (*it).second << "x" << (*it).first;
         }
     }
@@ -104,17 +104,19 @@ Poly operator-(const Poly& p){
 
 bool operator<(const Poly& a, const Poly& b){
     int defalut,a_max,b_max;
+    a_max = 0;
+    b_max = 0;
     for (auto it = a.begin(); it != a.end(); it++)
     {
         defalut=it->first;
-        if(defalut>=a_max){
+        if(defalut>=a_max || a_max == 0){
             a_max=defalut;
         }
     }
     for (auto it = b.begin(); it != b.end(); it++)
     {
         defalut=it->first;
-        if(defalut>=b_max){
+        if(defalut>=b_max || b_max == 0){
             b_max=defalut;
         }
     }
@@ -125,21 +127,23 @@ bool operator<(const Poly& a, const Poly& b){
     }
 }
 bool operator==(const Poly& a, const Poly& b){
-    return (std::equal(a.begin(), a.end(),b.begin()));
+    return (std::equal(a.begin(), a.end(),b.begin(),b.end()));
 }
 bool operator>(const Poly& a, const Poly& b){
     int defalut,a_max,b_max;
+    a_max = 0;
+    b_max = 0;
     for (auto it = a.begin(); it != a.end(); it++)
     {
         defalut=it->first;
-        if(defalut>=a_max){
+        if(defalut>=a_max || a_max==0){
             a_max=defalut;
         }
     }
     for (auto it = b.begin(); it != b.end(); it++)
     {
         defalut=it->first;
-        if(defalut>=b_max){
+        if(defalut>=b_max || b_max==0){
             b_max=defalut;
         }
     }
@@ -150,5 +154,5 @@ bool operator>(const Poly& a, const Poly& b){
     }
 }
 bool operator!=(const Poly& a, const Poly& b){
-    return !(std::equal(a.begin(), a.end(),b.begin()));
+    return !(std::equal(a.begin(), a.end(),b.begin(),b.end()));
 }
