@@ -122,7 +122,7 @@ bool operator<(const Poly& a, const Poly& b){
             b_max=defalut;
         }
     }
-    if(a_max<b_max){
+    if(a_max<b_max | a_max==0){
         return true;
     }else{
         return false;
@@ -149,7 +149,7 @@ bool operator>(const Poly& a, const Poly& b){
             b_max=defalut;
         }
     }
-    if(a_max>b_max){
+    if(a_max>b_max | b_max==0){
         return true;
     }else{
         return false;

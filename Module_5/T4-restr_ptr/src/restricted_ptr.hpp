@@ -26,9 +26,12 @@
 template <class T>
 class RestrictedPtr{
     T* ptr;
+    restricted_ref_counter *counter_;
     public:
     //default constructor
-    RestrictedPtr();
+    RestrictedPtr(){}
+
+    //RestrictedPtr():ptr(nullptr),counter_(nullptr){ counter_->reference_cnt_ =1;}
     //constructor with a raw pointer parameter
     RestrictedPtr(T* p){
         ptr=p;
@@ -47,6 +50,7 @@ class RestrictedPtr{
             counter_=new restricted_ref_counter();
         }
     }
+    //RestrictedPtr<double>::RestrictedPtr()
     //RestrictedPtr<T*>()
     //undefined reference to `RestrictedPtr<Car>::RestrictedPtr(Car*)'
     //destructor
@@ -63,8 +67,8 @@ class RestrictedPtr{
 
     //copy assignment operator
     //‘RestrictedPtr<T>& RestrictedPtr<T>::operator=(const RestrictedPtr<T>&) [with T = int]
-    //RestrictedPtr& operator=(const RestrictedPtr &other){
-    RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
+    RestrictedPtr& operator=(const RestrictedPtr &other){
+    //RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
         if((other.counter_->reference_cnt_)<=3){
             ptr=other.ptr;
             counter_=other.counter_;
@@ -87,8 +91,7 @@ class RestrictedPtr{
         return (*counter_).reference_cnt_;
     }
 
-    private:
-    restricted_ref_counter *counter_;
+
 };
 
 
