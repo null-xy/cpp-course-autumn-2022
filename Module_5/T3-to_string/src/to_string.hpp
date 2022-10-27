@@ -33,9 +33,6 @@
 
 template <typename T>
 std::string ToString(T a){
-//inline T ToString(T a){
-    //return std::to_string(a);
-    //return a;
     std::stringstream ss;
     ss<<"{ ";
     for (auto it=a.cbegin(); it!=a.cend();it++){
@@ -47,7 +44,7 @@ std::string ToString(T a){
     ss<<" }";
     std::string s=ss.str();
     return s;
-};
+}
 
 template <typename T>
 std::string ToString(std::string a){
@@ -56,14 +53,40 @@ std::string ToString(std::string a){
     std::string s=ss.str();
     return s;
 }
-
+/*
 template <typename T>
  int ToString(T a, T b){
     return std::distance(a,b);
- }
+ }*/
 
-//template< class InputIt >
-//std::vector( InputIt first, InputIt last, 
- //       const Allocator& alloc = Allocator() );
+template <typename T>
+std::string ToString(std::string::iterator a, std::string::iterator b){
+    std::stringstream ss;
+    ss<<"{ ";
+    for (auto it=a; it!=b;it++){
+        if(it!=a){
+            ss<<", ";
+        }
+        ss << (*it);
+    }
+    ss<<" }";
+    std::string s=ss.str();
+    return s;
+}
+
+template <typename T>
+std::string ToString(T a, T b){
+    std::stringstream ss;
+    ss<<"{ ";
+    for (auto it=a; it!=b;it++){
+        if(it!=a){
+            ss<<", ";
+        }
+        ss << (*it);
+    }
+    ss<<" }";
+    std::string s=ss.str();
+    return s;
+}
 
 #endif

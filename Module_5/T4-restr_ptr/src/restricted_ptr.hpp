@@ -21,5 +21,39 @@
     the copier should set it's pointer to nullptr and reference count to 1.
     NOTE: GetPointer, GetData and GetRefCount are needed for the tests to run
 */
+#include <iostream>
+template <class T>
+class RestrictedPtr{
+    T* ptr;
+    public:
+    //default constructor
+    RestrictedPtr();
+    //constructor with a raw pointer parameter
+    RestrictedPtr(T* p);
+    //copy constructor
+    //RestrictedPtr(const T& p);
+    RestrictedPtr(RestrictedPtr &t);
+    
+    //destructor
+    ~RestrictedPtr() { 
+        delete (ptr);
+        std::cout << "destructor " << std::endl; }
 
+    //copy assignment operator
+    RestrictedPtr& operator=(const RestrictedPtr &other);
+
+template <typename T1>
+    T1 GetData(){
+        return (*ptr);
+    }
+
+    T* GetPointer(){
+        return ptr;
+    }
+    int GetRefCount(){
+        return reference_cnt_;
+    }
+    private:
+    int reference_cnt_;
+};
 #endif
