@@ -62,9 +62,12 @@ class RestrictedPtr{
         }
 
     //copy assignment operator
-    RestrictedPtr& operator=(const RestrictedPtr &other){
+    //‘RestrictedPtr<T>& RestrictedPtr<T>::operator=(const RestrictedPtr<T>&) [with T = int]
+    //RestrictedPtr& operator=(const RestrictedPtr &other){
+    RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
         ptr=other.ptr;
         counter_=other.counter_;
+        return this;
     }
 
 //template <typename T1>
