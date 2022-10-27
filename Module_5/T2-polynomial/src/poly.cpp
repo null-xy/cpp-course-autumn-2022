@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <cmath>
+#include <algorithm>
 
 int Poly::operator[](int exp) const {
     auto it = values_.find(exp);
@@ -133,15 +135,22 @@ bool operator<(const Poly& a, const Poly& b){
     }
 }
 bool operator==(const Poly& a, const Poly& b){
-    /*std::vector<int> v_a;
+    std::vector<int> v_a;
     std::vector<int> v_b;
     for(auto it = a.begin(); it != a.end(); it++){
         v_a.push_back((*it).first);
     }
     for(auto it = b.begin(); it != b.end(); it++){
         v_b.push_back((*it).first);
-    }*/
-    std::stringstream ssa;
+    }
+    std::vector<int>::iterator max_a=std::max_element(v_a.begin(),v_a.end());
+    std::vector<int>::iterator max_b=std::max_element(v_b.begin(),v_b.end());
+    if((*max_a)==(*max_b)){
+        return true;
+    }else{
+        return false;
+    }
+    /*std::stringstream ssa;
     ssa<<a;
     std::string sa=ssa.str();
     std::stringstream ssb;
@@ -151,7 +160,7 @@ bool operator==(const Poly& a, const Poly& b){
         return true;
     }else{
         return false;
-    }
+    }*/
     //return (std::equal(a.begin(), a.end(),b.begin(),b.end()));
 }
 bool operator>(const Poly& a, const Poly& b){
@@ -183,7 +192,22 @@ bool operator>(const Poly& a, const Poly& b){
     }
 }
 bool operator!=(const Poly& a, const Poly& b){
-    std::stringstream ssa;
+    std::vector<int> v_a;
+    std::vector<int> v_b;
+    for(auto it = a.begin(); it != a.end(); it++){
+        v_a.push_back((*it).first);
+    }
+    for(auto it = b.begin(); it != b.end(); it++){
+        v_b.push_back((*it).first);
+    }
+    std::vector<int>::iterator max_a=std::max_element(v_a.begin(),v_a.end());
+    std::vector<int>::iterator max_b=std::max_element(v_b.begin(),v_b.end());
+    if((*max_a)==(*max_b)){
+        return false;
+    }else{
+        return true;
+    }
+    /*std::stringstream ssa;
     ssa<<a;
     std::string sa=ssa.str();
     std::stringstream ssb;
@@ -193,6 +217,6 @@ bool operator!=(const Poly& a, const Poly& b){
         return false;
     }else{
         return true;
-    }
+    }*/
     //return !(std::equal(a.begin(), a.end(),b.begin(),b.end()));
 }
