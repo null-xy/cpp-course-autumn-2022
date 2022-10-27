@@ -143,9 +143,9 @@ bool operator==(const Poly& a, const Poly& b){
     for(auto it = b.begin(); it != b.end(); it++){
         v_b.push_back((*it).first);
     }
-    std::vector<int>::iterator max_a=std::max_element(v_a.begin(),v_a.end());
-    std::vector<int>::iterator max_b=std::max_element(v_b.begin(),v_b.end());
-    if((*max_a)==(*max_b)){
+    int max_a=*std::max_element(v_a.begin(),v_a.end());
+    int max_b=*std::max_element(v_b.begin(),v_b.end());
+    if((max_a)==(max_b)){
         return true;
     }else{
         return false;
@@ -200,9 +200,9 @@ bool operator!=(const Poly& a, const Poly& b){
     for(auto it = b.begin(); it != b.end(); it++){
         v_b.push_back((*it).first);
     }
-    std::vector<int>::iterator max_a=std::max_element(v_a.begin(),v_a.end());
-    std::vector<int>::iterator max_b=std::max_element(v_b.begin(),v_b.end());
-    if((*max_a)==(*max_b)){
+    int max_a=*std::max_element(v_a.begin(),v_a.end());
+    int max_b=*std::max_element(v_b.begin(),v_b.end());
+    if((max_a)==(max_b)){
         return false;
     }else{
         return true;
