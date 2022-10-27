@@ -63,9 +63,9 @@ class RestrictedPtr{
 
     //copy assignment operator
     RestrictedPtr& operator=(const RestrictedPtr &other){
-        ptr=other;
+        ptr=other.ptr;
         counter_=other.counter_;
-    };
+    }
 
 //template <typename T1>
     T& GetData(){
