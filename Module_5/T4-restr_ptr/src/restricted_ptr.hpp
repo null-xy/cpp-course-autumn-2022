@@ -65,9 +65,14 @@ class RestrictedPtr{
     //‘RestrictedPtr<T>& RestrictedPtr<T>::operator=(const RestrictedPtr<T>&) [with T = int]
     //RestrictedPtr& operator=(const RestrictedPtr &other){
     RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
-        ptr=other.ptr;
-        counter_=other.counter_;
-        return this;
+        if((other.counter_->reference_cnt_)<=3){
+            ptr=other.ptr;
+            counter_=other.counter_;
+        }else{
+            ptr = nullptr;
+            counter_=new restricted_ref_counter();
+        }
+        return *this;
     }
 
 //template <typename T1>
