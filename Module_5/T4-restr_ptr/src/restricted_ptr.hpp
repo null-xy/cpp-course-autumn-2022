@@ -21,6 +21,7 @@
     the copier should set it's pointer to nullptr and reference count to 1.
     NOTE: GetPointer, GetData and GetRefCount are needed for the tests to run
 */
+
 #include <iostream>
 template <class T>
 class RestrictedPtr{
@@ -63,7 +64,7 @@ class RestrictedPtr{
     //copy assignment operator
     RestrictedPtr& operator=(const RestrictedPtr &other){
         ptr=other;
-        counter_=new restricted_ref_counter();
+        counter_=other.counter_;
     };
 
 //template <typename T1>
