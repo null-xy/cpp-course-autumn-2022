@@ -122,14 +122,37 @@ bool operator<(const Poly& a, const Poly& b){
             b_max=defalut;
         }
     }
-    if(a_max<b_max | a_max==0){
+    if(a.begin()==a.end()){
+        return true;
+    }else if(b.begin()==b.end()){
+        return false;
+    }else if(a_max<b_max){
         return true;
     }else{
         return false;
     }
 }
 bool operator==(const Poly& a, const Poly& b){
-    return (std::equal(a.begin(), a.end(),b.begin(),b.end()));
+    /*std::vector<int> v_a;
+    std::vector<int> v_b;
+    for(auto it = a.begin(); it != a.end(); it++){
+        v_a.push_back((*it).first);
+    }
+    for(auto it = b.begin(); it != b.end(); it++){
+        v_b.push_back((*it).first);
+    }*/
+    std::stringstream ssa;
+    ssa<<a;
+    std::string sa=ssa.str();
+    std::stringstream ssb;
+    ssb<<b;
+    std::string sb=ssb.str();
+    if(sa==sb){
+        return true;
+    }else{
+        return false;
+    }
+    //return (std::equal(a.begin(), a.end(),b.begin(),b.end()));
 }
 bool operator>(const Poly& a, const Poly& b){
     int defalut,a_max,b_max;
@@ -149,12 +172,27 @@ bool operator>(const Poly& a, const Poly& b){
             b_max=defalut;
         }
     }
-    if(a_max>b_max | b_max==0){
+    if(a.begin()==a.end()){
+        return false;
+    }else if(b.begin()==b.end()){
+        return true;
+    }else if(a_max>b_max){
         return true;
     }else{
         return false;
     }
 }
 bool operator!=(const Poly& a, const Poly& b){
-    return !(std::equal(a.begin(), a.end(),b.begin(),b.end()));
+    std::stringstream ssa;
+    ssa<<a;
+    std::string sa=ssa.str();
+    std::stringstream ssb;
+    ssb<<b;
+    std::string sb=ssb.str();
+    if(sa==sb){
+        return false;
+    }else{
+        return true;
+    }
+    //return !(std::equal(a.begin(), a.end(),b.begin(),b.end()));
 }
