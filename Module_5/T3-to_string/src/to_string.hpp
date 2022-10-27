@@ -27,6 +27,43 @@
  * This would allow printing containers that contain other containers, etc.
  */
 
+#include <string>
+#include <vector>
+#include <sstream>
 
+template <typename T>
+std::string ToString(T a){
+//inline T ToString(T a){
+    //return std::to_string(a);
+    //return a;
+    std::stringstream ss;
+    ss<<"{ ";
+    for (auto it=a.cbegin(); it!=a.cend();it++){
+        if(it!=a.cbegin()){
+            ss<<", ";
+        }
+        ss << (*it);
+    }
+    ss<<" }";
+    std::string s=ss.str();
+    return s;
+};
+
+template <typename T>
+std::string ToString(std::string a){
+    std::stringstream ss;
+    ss<<"\""<<a<<"\"";
+    std::string s=ss.str();
+    return s;
+}
+
+template <typename T>
+ int ToString(T a, T b){
+    return std::distance(a,b);
+ }
+
+//template< class InputIt >
+//std::vector( InputIt first, InputIt last, 
+ //       const Allocator& alloc = Allocator() );
 
 #endif
