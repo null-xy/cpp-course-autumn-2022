@@ -135,7 +135,7 @@ bool operator<(const Poly& a, const Poly& b){
     }
 }
 bool operator==(const Poly& a, const Poly& b){
-    if(a.begin()!=a.end() & b.begin()!=b.end()){
+    if((a.begin()!=a.end()) & (b.begin()!=b.end())){
         std::vector<int> v_a;
         std::vector<int> v_b;
         for(auto it = a.begin(); it != a.end(); it++){
@@ -198,7 +198,7 @@ bool operator>(const Poly& a, const Poly& b){
     }
 }
 bool operator!=(const Poly& a, const Poly& b){
-    if(a.begin()!=a.end() & b.begin()!=b.end()){
+    if((a.begin()!=a.end()) & (b.begin()!=b.end())){
         std::vector<int> v_a;
         std::vector<int> v_b;
         for(auto it = a.begin(); it != a.end(); it++){
