@@ -52,11 +52,11 @@ class RestrictedPtr{
     ~RestrictedPtr() { 
         if((*counter_).reference_cnt_>1){
             (*counter_).reference_cnt_--;
-            std::cout << "reference_cnt_--:  "<<(*counter_).reference_cnt_ << std::endl;
+            //std::cout << "reference_cnt_--:  "<<(*counter_).reference_cnt_ << std::endl;
         }else{
             delete (counter_);
             delete (ptr);
-            std::cout << "destructor "<<(*counter_).reference_cnt_ << std::endl;
+            //std::cout << "destructor "<<(*counter_).reference_cnt_ << std::endl;
         }
         }
 
