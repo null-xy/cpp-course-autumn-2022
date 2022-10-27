@@ -31,7 +31,7 @@ class RestrictedPtr{
     //default constructor
     //RestrictedPtr(){}
 
-    RestrictedPtr():ptr(nullptr),counter_(nullptr){ counter_->reference_cnt_ =1;}
+    RestrictedPtr():ptr(nullptr),counter_(nullptr){ }
     //constructor with a raw pointer parameter
     RestrictedPtr(T* p){
         ptr=p;
