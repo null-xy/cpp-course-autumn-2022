@@ -151,7 +151,7 @@ bool operator==(const Poly& a, const Poly& b){
         }else{
             return false;
         }
-    }else if(a.begin()==a.end() & b.begin()==b.end()){
+    }else if((a.begin()==a.end()) & (b.begin()==b.end())){
         return true;
     }else{
         return false;
@@ -214,7 +214,7 @@ bool operator!=(const Poly& a, const Poly& b){
         }else{
             return true;
         }
-    }else if(a.begin()==a.end() & b.begin()==b.end()){
+    }else if((a.begin()==a.end()) & (b.begin()==b.end())){
         return false;
     }else{
         return true;
