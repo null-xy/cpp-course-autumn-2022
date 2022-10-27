@@ -46,7 +46,7 @@ std::string ToString(T a){
     return s;
 }
 
-template <typename T>
+template <>
 std::string ToString(std::string a){
     std::stringstream ss;
     ss<<"\""<<a<<"\"";
