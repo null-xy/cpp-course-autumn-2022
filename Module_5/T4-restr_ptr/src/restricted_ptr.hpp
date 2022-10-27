@@ -29,21 +29,45 @@ class RestrictedPtr{
     //default constructor
     RestrictedPtr();
     //constructor with a raw pointer parameter
-    RestrictedPtr(T* p);
+    RestrictedPtr(T* p){
+        ptr=p;
+        counter_=new restricted_ref_counter();
+    }
     //copy constructor
     //RestrictedPtr(const T& p);
-    RestrictedPtr(RestrictedPtr &t);
-    
+    RestrictedPtr(RestrictedPtr &t){
+        if((t.counter_->reference_cnt_)<=3){
+            t.counter_->reference_cnt_++;
+            //*t.counter_).reference_cnt_++;
+            ptr=t.ptr;
+            counter_=t.counter_;
+        }else{
+            ptr = nullptr;
+            counter_=new restricted_ref_counter();
+        }
+    }
+    //RestrictedPtr<T*>()
+    //undefined reference to `RestrictedPtr<Car>::RestrictedPtr(Car*)'
     //destructor
     ~RestrictedPtr() { 
-        delete (ptr);
-        std::cout << "destructor " << std::endl; }
+        if((*counter_).reference_cnt_>1){
+            (*counter_).reference_cnt_--;
+            std::cout << "reference_cnt_--:  "<<(*counter_).reference_cnt_ << std::endl;
+        }else{
+            delete (counter_);
+            delete (ptr);
+            std::cout << "destructor "<<(*counter_).reference_cnt_ << std::endl;
+        }
+        }
 
     //copy assignment operator
-    RestrictedPtr& operator=(const RestrictedPtr &other);
+    RestrictedPtr& operator=(const RestrictedPtr &other){
+        ptr=other;
+        counter_=new restricted_ref_counter();
+    };
 
-template <typename T1>
-    T1 GetData(){
+//template <typename T1>
+    T& GetData(){
         return (*ptr);
     }
 
@@ -51,9 +75,12 @@ template <typename T1>
         return ptr;
     }
     int GetRefCount(){
-        return reference_cnt_;
+        return (*counter_).reference_cnt_;
     }
+
     private:
-    int reference_cnt_;
+    restricted_ref_counter *counter_;
 };
+
+
 #endif
