@@ -7,12 +7,16 @@ Printers::~Printers(){
         //delete *(*it).first;
         //delete it.second;
     //}
+    for(std::vector<std::pair<std::string, StringPrinter*>>::iterator 
+    it = stringPrinter_.begin(); it != stringPrinter_.end();it++){
+        delete (*it).second;
+    }
 
 }
 Printers::Printers(const Printers& other){
     //stringPrinter_=other.stringPrinter_;
     for(std::vector<std::pair<std::string, StringPrinter*>>::const_iterator 
-    it = other.stringPrinter_.begin(); it != other.stringPrinter_.end();it++)
+    it = other.stringPrinter_.cbegin(); it != other.stringPrinter_.cend();it++)
     {
         std::string new_name =(*it).first;
         stringPrinter_.push_back(std::make_pair(new_name,(*it).second->Clone()));
@@ -21,7 +25,7 @@ Printers::Printers(const Printers& other){
 Printers& Printers::operator=(const Printers& other){
     //stringPrinter_=other.stringPrinter_;
     for(std::vector<std::pair<std::string, StringPrinter*>>::const_iterator 
-    it = other.stringPrinter_.begin(); it != other.stringPrinter_.end();it++)
+    it = other.stringPrinter_.cbegin(); it != other.stringPrinter_.cend();it++)
     {
         std::string new_name =(*it).first;
         stringPrinter_.push_back(std::make_pair(new_name,(*it).second->Clone()));
