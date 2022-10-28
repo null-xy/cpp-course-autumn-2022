@@ -32,31 +32,37 @@ class RestrictedPtr{
 
     public:
     std::shared_ptr<T> ptr;
+    int* counter_;
     //T* ptr;
-    Restricted_ref_counter* counter_;
+    //Restricted_ref_counter* counter_;
     //default constructor
     //RestrictedPtr(){}
-
-    RestrictedPtr():ptr(nullptr),counter_(nullptr){ //this->counter_->SetRef();
+    RestrictedPtr():ptr(nullptr){ 
+        //this->counter_->SetRef();,counter_(nullptr)
+        (*counter_)=1;
      }
     //constructor with a raw pointer parameter
     RestrictedPtr(T* p):ptr(p){
+        //*counter_=1;
         //ptr=p;
-        counter_=new Restricted_ref_counter();
+        //counter_=new Restricted_ref_counter();
         //counter_->SetRef();
     }
     //copy constructor
     //RestrictedPtr(const T& p);
     RestrictedPtr(RestrictedPtr<T> &t){
-        if((t.counter_->reference_cnt_)<3){
-            t.counter_->reference_cnt_++;
+        if((*t.counter_)<3){
+            //t.counter_->reference_cnt_++;
+            //t.counter_++;
+            (*t.counter_)++;
             //t.counter_->AddRef();
             //*t.counter_).reference_cnt_++;
             ptr=t.ptr;
             counter_=t.counter_;
         }else{
             ptr = nullptr;
-            counter_=new Restricted_ref_counter();
+            (*counter_)=1;
+            //counter_=new Restricted_ref_counter();
             //counter_->SetRef();
         }
     }
@@ -65,13 +71,15 @@ class RestrictedPtr{
     //undefined reference to `RestrictedPtr<Car>::RestrictedPtr(Car*)'
     //destructor
     ~RestrictedPtr() { 
-        if( (this->counter_) && ((*counter_).reference_cnt_>1)){
-            (*counter_).reference_cnt_--;
+        //if( (this->counter_) && ((*counter_).reference_cnt_>1)){
+        if((*counter_)>1){
+            (*counter_)--;
+            //(*counter_).reference_cnt_--;
             //counter_->RemoveRef();
             //std::cout << "reference_cnt_--:  "<<(*counter_).reference_cnt_ << std::endl;
         }else{
             //counter_->RemoveRef();
-            (*counter_).reference_cnt_--;
+            (*counter_)--;
             this->Release();
             //delete (counter_);
             //delete (ptr);
@@ -84,18 +92,20 @@ class RestrictedPtr{
     RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
     //RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
         if(other.ptr.get()==nullptr){
-            counter_=new Restricted_ref_counter();
+            //counter_=new Restricted_ref_counter();
+            (*counter_)=1;
         }
         else if((other.GetRefCount())<3){
             ptr=other.ptr;
             counter_=other.counter_;
         }else{
             ptr = nullptr;
-            counter_=new Restricted_ref_counter();
+            (*counter_)=1;
+            //counter_=new Restricted_ref_counter();
             //counter_->SetRef();
         }
         //return *this;
-        return this->ptr;
+        //return this->ptr;
     }
 
 //template <typename T1>
@@ -107,7 +117,8 @@ class RestrictedPtr{
         return ptr.get();
     }
     int GetRefCount(){
-        return (*counter_).reference_cnt_;
+        //return (*counter_).reference_cnt_;
+        return *this->counter_;
     }
     void Release(){
         if(this->GetRefCount()==0){

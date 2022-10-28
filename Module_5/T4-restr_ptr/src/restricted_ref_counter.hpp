@@ -3,7 +3,7 @@
 
 // implement a reference counter helper class if you want to
 
-
+/*
 struct Restricted_ref_counter
 {
     int reference_cnt_;
@@ -11,6 +11,6 @@ struct Restricted_ref_counter
         reference_cnt_=1;
     }
 };
-
+*/
 
 #endif
