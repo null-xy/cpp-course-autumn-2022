@@ -3,10 +3,11 @@
 #include <algorithm>
 
 Printers::~Printers(){
-    for(auto it : stringPrinter_){
-        //delete it.first;
+    //for(auto it : stringPrinter_){
+        //delete *(*it).first;
         //delete it.second;
-    }
+    //}
+    
 }
 Printers::Printers(const Printers& other){
     stringPrinter_=other.stringPrinter_;

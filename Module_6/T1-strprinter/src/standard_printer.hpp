@@ -24,7 +24,7 @@
 class StandardPrinter : public StringPrinter{
     public:
     StandardPrinter(std::ostream& os = std::cout);
-
+    virtual StandardPrinter* Clone() const;
     virtual StringPrinter& operator()(const std::string& a);
 
 };

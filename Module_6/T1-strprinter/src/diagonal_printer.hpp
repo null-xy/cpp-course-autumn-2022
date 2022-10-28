@@ -45,7 +45,7 @@ class DiagonalPrinter : public StringPrinter{
         first="";
         this->last_="";
     }*/
-    DiagonalPrinter* Clone() const;
+    virtual DiagonalPrinter* Clone() const;
     virtual StringPrinter& operator()(const std::string& a);
 
     private:
