@@ -23,20 +23,25 @@
 */
 
 #include <iostream>
+#include <memory>
+
 template <class T>
 class RestrictedPtr{
-    T* ptr;
-    Restricted_ref_counter* counter_;
+    
+    
 
     public:
+    std::shared_ptr<T> ptr;
+    //T* ptr;
+    Restricted_ref_counter* counter_;
     //default constructor
     //RestrictedPtr(){}
 
     RestrictedPtr():ptr(nullptr),counter_(nullptr){ //this->counter_->SetRef();
      }
     //constructor with a raw pointer parameter
-    RestrictedPtr(T* p){
-        ptr=p;
+    RestrictedPtr(T* p):ptr(p){
+        //ptr=p;
         counter_=new Restricted_ref_counter();
         //counter_->SetRef();
     }
@@ -91,19 +96,21 @@ class RestrictedPtr{
 
 //template <typename T1>
     T& GetData(){
-        return (*ptr);
+        return *ptr.get();
     }
 
     T* GetPointer(){
-        return ptr;
+        return ptr.get();
     }
     int GetRefCount(){
         return (*counter_).reference_cnt_;
     }
     void Release(){
         if(this->GetRefCount()==0){
-            delete this->ptr;
-            delete this->counter_;
+            //delete ptr;
+            //delete counter_;
+           // delete this->ptr;
+            //delete this->counter_;
         }
     }
 };
