@@ -17,7 +17,7 @@ class Restricted_ref_counter
         (this->reference_cnt_)--;
     }
     int GetRefCnt(){
-        return reference_cnt_;
+        return (this->reference_cnt_);
     }
     private:
     int reference_cnt_;
