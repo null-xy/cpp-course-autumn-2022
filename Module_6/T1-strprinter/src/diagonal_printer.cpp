@@ -19,8 +19,9 @@ StringPrinter& DiagonalPrinter::operator()(const std::string& a){
             os_<<" ";
         }
         os_<<a.at(i);
-        for(unsigned int k=(a.length()-1);k>0;k--){
+        for(unsigned int k=(a.length()-i);k>0;k--){
             os_<<" ";
+            //std::cout<<k;
         }
         os_<<std::endl;
     }
