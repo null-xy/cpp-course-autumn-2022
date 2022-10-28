@@ -99,27 +99,20 @@ class RestrictedPtr{
     //copy assignment operator
     //‘RestrictedPtr<T>& RestrictedPtr<T>::operator=(const RestrictedPtr<T>&) [with T = int]
     RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
-    //RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
-        /*if(other.ptr.get()==nullptr){
-            //counter_=new Restricted_ref_counter();
-            //(*counter_)=1;
-            int counter_p_=1;
-            counter_=&counter_p_;
+        if(this==&other){
+            return *this;
         }
-        else 
-        */if((other.GetRefCount())<3){
+        else if((other.GetRefCount())<3){
+            (*other.counter_)++;
             ptr=other.ptr;
             counter_=other.counter_;
+            return *this;
         }else{
             ptr = nullptr;
-            //(*counter_)=1;
             counter_=new int;
             *counter_=1;
-            //counter_=new Restricted_ref_counter();
-            //counter_->SetRef();
+            return *this;
         }
-        //return *this;
-        //return this->ptr;
     }
 
 //template <typename T1>
