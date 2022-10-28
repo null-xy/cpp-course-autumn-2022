@@ -8,7 +8,7 @@ class Restricted_ref_counter
 {
     public:
     void SetRef(){
-        reference_cnt_=1;
+        (this->reference_cnt_)=1;
     }
     void AddRef(){
         (this->reference_cnt_)++;

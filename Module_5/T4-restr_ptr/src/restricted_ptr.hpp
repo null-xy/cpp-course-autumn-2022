@@ -96,7 +96,7 @@ class RestrictedPtr{
         return ptr;
     }
     int GetRefCount(){
-        return (*counter_).GetRefCnt();
+        return this->counter_->GetRefCnt();
     }
     void Release(){
         if(this->GetRefCount()==0){
