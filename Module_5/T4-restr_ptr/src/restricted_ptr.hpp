@@ -33,17 +33,24 @@ class RestrictedPtr{
     public:
     std::shared_ptr<T> ptr;
     int* counter_;
+    //unsigned int counter_;
     //T* ptr;
     //Restricted_ref_counter* counter_;
     //default constructor
     //RestrictedPtr(){}
-    RestrictedPtr():ptr(nullptr),counter_(nullptr){ 
-        //this->counter_->SetRef();
+    RestrictedPtr():ptr(nullptr){ 
+        //this->counter_->SetRef();,counter_(nullptr)
+        counter_=new int;
+        *counter_=1;
+        //int counter_p_=1;
+        //counter_=&counter_p_;
      }
     //constructor with a raw pointer parameter
     RestrictedPtr(T* p):ptr(p){
-        (*counter_)=1;
-        //*counter_=1;
+        counter_=new int;
+        *counter_=1;
+        //int counter_p_=1;
+        //counter_=&counter_p_;
         //ptr=p;
         //counter_=new Restricted_ref_counter();
         //counter_->SetRef();
@@ -61,7 +68,9 @@ class RestrictedPtr{
             counter_=t.counter_;
         }else{
             ptr = nullptr;
-            (*counter_)=1;
+            counter_=new int;
+            *counter_=1;
+            //(*counter_)=1;
             //counter_=new Restricted_ref_counter();
             //counter_->SetRef();
         }
@@ -91,16 +100,21 @@ class RestrictedPtr{
     //‘RestrictedPtr<T>& RestrictedPtr<T>::operator=(const RestrictedPtr<T>&) [with T = int]
     RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
     //RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
-        if(other.ptr.get()==nullptr){
+        /*if(other.ptr.get()==nullptr){
             //counter_=new Restricted_ref_counter();
-            (*counter_)=1;
+            //(*counter_)=1;
+            int counter_p_=1;
+            counter_=&counter_p_;
         }
-        else if((other.GetRefCount())<3){
+        else 
+        */if((other.GetRefCount())<3){
             ptr=other.ptr;
             counter_=other.counter_;
         }else{
             ptr = nullptr;
-            (*counter_)=1;
+            //(*counter_)=1;
+            counter_=new int;
+            *counter_=1;
             //counter_=new Restricted_ref_counter();
             //counter_->SetRef();
         }
@@ -114,7 +128,11 @@ class RestrictedPtr{
     }
 
     T* GetPointer(){
-        return ptr.get();
+        if(ptr!=nullptr){
+            return ptr.get();
+        }else{
+            return nullptr;
+        }
     }
     int GetRefCount(){
         //return (*counter_).reference_cnt_;
@@ -123,7 +141,7 @@ class RestrictedPtr{
     void Release(){
         if(this->GetRefCount()==0){
             //delete ptr;
-            //delete counter_;
+            delete counter_;
            // delete this->ptr;
             //delete this->counter_;
         }
