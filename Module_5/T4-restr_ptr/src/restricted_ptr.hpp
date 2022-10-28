@@ -40,15 +40,13 @@ class RestrictedPtr{
     //RestrictedPtr(){}
     RestrictedPtr():ptr(nullptr){ 
         //this->counter_->SetRef();,counter_(nullptr)
-        counter_=new int;
-        *counter_=1;
+        counter_ = new int(1);
         //int counter_p_=1;
         //counter_=&counter_p_;
      }
     //constructor with a raw pointer parameter
     RestrictedPtr(T* p):ptr(p){
-        counter_=new int;
-        *counter_=1;
+        counter_ = new int(1);
         //int counter_p_=1;
         //counter_=&counter_p_;
         //ptr=p;
@@ -68,8 +66,7 @@ class RestrictedPtr{
             counter_=t.counter_;
         }else{
             ptr = nullptr;
-            counter_=new int;
-            *counter_=1;
+            counter_ = new int(1);
             //(*counter_)=1;
             //counter_=new Restricted_ref_counter();
             //counter_->SetRef();
@@ -109,8 +106,7 @@ class RestrictedPtr{
             return *this;
         }else{
             ptr = nullptr;
-            counter_=new int;
-            *counter_=1;
+            counter_ = new int(1);
             return *this;
         }
     }
