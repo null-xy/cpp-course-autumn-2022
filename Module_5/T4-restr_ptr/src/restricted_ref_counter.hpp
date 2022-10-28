@@ -4,12 +4,23 @@
 // implement a reference counter helper class if you want to
 
 
-struct restricted_ref_counter
+class Restricted_ref_counter
 {
-    int reference_cnt_;
-    restricted_ref_counter(){
+    public:
+    void SetRef(){
         reference_cnt_=1;
     }
+    void AddRef(){
+        (this->reference_cnt_)++;
+    }
+    void RemoveRef(){
+        (this->reference_cnt_)--;
+    }
+    int GetRefCnt(){
+        return reference_cnt_;
+    }
+    private:
+    int reference_cnt_;
 };
 
 

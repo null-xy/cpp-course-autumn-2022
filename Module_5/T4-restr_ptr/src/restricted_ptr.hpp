@@ -26,7 +26,8 @@
 template <class T>
 class RestrictedPtr{
     T* ptr;
-    restricted_ref_counter *counter_;
+    Restricted_ref_counter* counter_;
+
     public:
     //default constructor
     //RestrictedPtr(){}
@@ -35,19 +36,22 @@ class RestrictedPtr{
     //constructor with a raw pointer parameter
     RestrictedPtr(T* p){
         ptr=p;
-        counter_=new restricted_ref_counter();
+        counter_=new Restricted_ref_counter();
+        counter_->SetRef();
     }
     //copy constructor
     //RestrictedPtr(const T& p);
-    RestrictedPtr(RestrictedPtr &t){
-        if((t.counter_->reference_cnt_)<=3){
-            t.counter_->reference_cnt_++;
+    RestrictedPtr(RestrictedPtr<T> &t){
+        if((t.counter_->GetRefCnt())<3){
+            //t.counter_->reference_cnt_++;
+            t.counter_->AddRef();
             //*t.counter_).reference_cnt_++;
             ptr=t.ptr;
             counter_=t.counter_;
         }else{
             ptr = nullptr;
-            counter_=new restricted_ref_counter();
+            counter_=new Restricted_ref_counter();
+            counter_->SetRef();
         }
     }
     //RestrictedPtr<double>::RestrictedPtr()
@@ -55,26 +59,29 @@ class RestrictedPtr{
     //undefined reference to `RestrictedPtr<Car>::RestrictedPtr(Car*)'
     //destructor
     ~RestrictedPtr() { 
-        if((*counter_).reference_cnt_>1){
-            (*counter_).reference_cnt_--;
+        if( (this->counter_) && ((*counter_).GetRefCnt()>1)){
+            //(*counter_).reference_cnt_--;
+            counter_->RemoveRef();
             //std::cout << "reference_cnt_--:  "<<(*counter_).reference_cnt_ << std::endl;
         }else{
-            delete (counter_);
-            delete (ptr);
+            counter_->RemoveRef();
+            this->Release();
+            //delete (counter_);
+            //delete (ptr);
             //std::cout << "destructor "<<(*counter_).reference_cnt_ << std::endl;
         }
         }
 
     //copy assignment operator
     //‘RestrictedPtr<T>& RestrictedPtr<T>::operator=(const RestrictedPtr<T>&) [with T = int]
-    RestrictedPtr& operator=(const RestrictedPtr &other){
+    RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
     //RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
         if((other.counter_->reference_cnt_)<=3){
             ptr=other.ptr;
             counter_=other.counter_;
         }else{
             ptr = nullptr;
-            counter_=new restricted_ref_counter();
+            counter_=new Restricted_ref_counter();
         }
         return *this;
     }
@@ -88,10 +95,14 @@ class RestrictedPtr{
         return ptr;
     }
     int GetRefCount(){
-        return (*counter_).reference_cnt_;
+        return (*counter_).GetRefCnt();
     }
-
-
+    void Release(){
+        if(this->GetRefCount()==0){
+            delete this->ptr;
+            delete this->counter_;
+        }
+    }
 };
 
 
