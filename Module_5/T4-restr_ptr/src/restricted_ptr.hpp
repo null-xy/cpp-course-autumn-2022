@@ -32,7 +32,7 @@ class RestrictedPtr{
     //default constructor
     //RestrictedPtr(){}
 
-    RestrictedPtr():ptr(nullptr),counter_(nullptr){ }
+    RestrictedPtr():ptr(nullptr),counter_(nullptr){ this->counter_->SetRef(); }
     //constructor with a raw pointer parameter
     RestrictedPtr(T* p){
         ptr=p;
