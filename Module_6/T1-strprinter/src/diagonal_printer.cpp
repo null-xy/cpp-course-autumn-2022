@@ -9,13 +9,19 @@ DiagonalPrinter* DiagonalPrinter::Clone() const{
 
 StringPrinter& DiagonalPrinter::operator()(const std::string& a){
     //std::copy(a.begin(), a.end(), std::ostream_iterator<char>(os_));
-    os_<<first_<<std::endl;
+    if(first_!=""){
+        os_<<first_<<std::endl;
+    }
     for(unsigned int i =0; i<a.length();i++){
-        os_<<a.at(i)<<std::endl;
-        for(unsigned int j=0;j<=i;j++){
+        for(unsigned int j=1;j<=i;j++){
             os_<<" ";
         }
+        os_<<a.at(i)<<std::endl;
+
     }
-    os_<<last_<<std::endl;
+    if (last_!="")
+    {
+        os_<<last_<<std::endl;
+    }
     return *this;
 }

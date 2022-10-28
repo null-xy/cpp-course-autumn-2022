@@ -43,7 +43,7 @@
 class StringPrinter{
     public:
     StringPrinter(std::ostream& os = std::cout):os_(os){}
-    virtual StringPrinter* Clone() const{}
+    virtual StringPrinter* Clone() const=0;
     
     virtual ~StringPrinter(){}
 
