@@ -123,7 +123,7 @@ class RestrictedPtr{
             return nullptr;
         }
     }
-    int GetRefCount(){
+    int GetRefCount() const {
         //return (*counter_).reference_cnt_;
         return *this->counter_;
     }
