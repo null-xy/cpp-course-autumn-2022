@@ -22,4 +22,59 @@
  * prints the return value of GetError of the exception thrown by 
  * GetData instead.
 */
+#ifndef AALTO_ELEC_RESTRICTED_INTERFACE_CLASS
+#define AALTO_ELEC_RESTRICTED_INTERFACE_CLASS
+#include "restricted_ptr.hpp"
 
+using namespace WeirdMemoryAllocator;
+
+//WeirdMemoryAllocator::RestrictedPtr<int> &MakeRestricted<int>(int *p)
+template <typename T>
+    RestrictedPtr<T>& MakeRestricted(T* p){
+        RestrictedPtr<T> new_p(p);
+        //delete p;
+        return new_p;
+    }
+
+template <typename T>
+    RestrictedPtr<T>& CopyRestricted(RestrictedPtr<T>& p){
+        try{
+            RestrictedPtr<T> new_p = p;
+            return new_p;
+        }
+        catch(RestrictedCopyException& copyex){
+            std::cout << copyex.GetError() << std::endl;
+        }
+        catch(RestrictedNullException& nullex){
+            std::cout << nullex.GetError() << std::endl;
+        }
+        //RestrictedPtr<T> new_p = p;
+        //return new_p;
+    }
+
+template <typename T>
+    std::ostream &operator<<(std::ostream& os, RestrictedPtr<T>& p){
+        try{
+            os<<p.GetData();
+            return os;
+        }catch(RestrictedNullException &nullex){
+            std::cout << nullex.GetError() << std::endl;
+        }
+        /*os<<p.GetData();
+        return os;*/
+    }
+
+/*
+class RestrictedInterface{
+        RestrictedInterface(){};
+        virtual ~RestrictedInterface() {}
+
+        static RestrictedPtr<T>& MakeRestricted(T* p)=0;
+
+        virtual RestrictedPtr<T>& CopyRestricted(const RestrictedPtr<T>& p)=0;
+
+        virtual std::ostream &operator<<(std::ostream& os, RestrictedPtr<T>& p)=0;
+};
+*/
+
+#endif

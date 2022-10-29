@@ -23,24 +23,63 @@
  * 
  * The class shouldn't leak any memory.
 */
+#ifndef AALTO_ELEC_RESTRICTED_PTR_CLASS
+#define AALTO_ELEC_RESTRICTED_PTR_CLASS
 
 #include <iostream>
 #include <memory>
+#include <exception>
+#include "restricted_ptr_ex.hpp"
 
+namespace WeirdMemoryAllocator{
 template <class T>
 class RestrictedPtr{
     public:
     std::shared_ptr<T> ptr;
     int* counter_;
+    std::string ptr_use_;
     
     RestrictedPtr():ptr(nullptr){ 
         counter_ = new int(1);
-     }
-    RestrictedPtr(T* p):ptr(p){
-        counter_ = new int(1);
+        ptr_use_="nullptr";
     }
-    RestrictedPtr(RestrictedPtr<T> &t){
-        if((*t.counter_)<3){
+
+    RestrictedPtr(T* p):ptr(p){
+        if(p==nullptr){
+            throw RestrictedNullException(ptr_use_); 
+        }else{
+            counter_ = new int(1);
+            ptr_use_="nullptr";
+        }
+        //counter_ = new int(1);
+        //ptr_use_="nullptr";
+    }
+
+    RestrictedPtr(T* p,std::string str):ptr(p),ptr_use_(str){
+        if(p==nullptr){
+            throw RestrictedNullException(ptr_use_); 
+        }else{
+            counter_ = new int(1);
+            //ptr_use_="nullptr";
+        }
+        //counter_ = new int(1);
+        //ptr_use_="nullptr";
+    }
+
+    //RestrictedPtr(std::nullptr_t, const char [17])
+
+    RestrictedPtr(RestrictedPtr<T> &other){
+        if((*other.counter_)>=3){
+            throw RestrictedCopyException(ptr_use_);
+            //ptr = nullptr;
+            //counter_ = new int(1);
+        }else{
+            (*other.counter_)++;
+            ptr=other.ptr;
+            counter_=other.counter_;
+            ptr_use_=other.ptr_use_;
+        }
+        /*if((*t.counter_)<3){
             (*t.counter_)++;
             ptr=t.ptr;
             counter_=t.counter_;
@@ -48,6 +87,7 @@ class RestrictedPtr{
             ptr = nullptr;
             counter_ = new int(1);
         }
+        */
     }
     ~RestrictedPtr(){
         if((*counter_)>1){
@@ -58,25 +98,31 @@ class RestrictedPtr{
         }
     }
     RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
-        if((*t.counter_)<3){
-            (*t.counter_)++;
-            ptr=t.ptr;
-            counter_=t.counter_;
+        if((*other.counter_)>=3){
+            throw RestrictedCopyException(ptr_use_);
+            //ptr = nullptr;
+            //counter_ = new int(1);
         }else{
-            ptr = nullptr;
-            counter_ = new int(1);
+            (*other.counter_)++;
+            ptr=other.ptr;
+            counter_=other.counter_;
+            ptr_use_=other.ptr_use_;
         }
         return *this;
     }
     T& GetData(){
-        return *ptr.get();
+        if(this->ptr==nullptr){
+            throw RestrictedNullException(ptr_use_);
+        }else{
+            return *ptr.get();
+        }
     }
 
-    T* GetPointer(){
-        if(ptr!=nullptr){
-            return ptr.get();
-        }else{
+    T* GetPointer() const {
+        if(ptr==nullptr){
             return nullptr;
+        }else{
+            return ptr.get();            
         }
     }
     int GetRefCount() const {
@@ -87,4 +133,7 @@ class RestrictedPtr{
             delete counter_;
         }
     }
+
 };
+}
+#endif

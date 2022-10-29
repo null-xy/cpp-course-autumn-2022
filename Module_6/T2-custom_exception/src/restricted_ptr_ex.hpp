@@ -38,4 +38,62 @@
 <use>: nullptr exception!
  * where <use> is replaced by the string given in to the constructor.
 */
+#ifndef AALTO_ELEC_RESTRICTED_PTR_EX_CLASS
+#define AALTO_ELEC_RESTRICTED_PTR_EX_CLASS
+#include <sstream>
 
+namespace WeirdMemoryAllocator{
+
+class RestrictedPtrException : public std::exception {
+    public:
+    RestrictedPtrException(const std::string& t):ptr_use_(t){}
+    
+    virtual const std::string GetError() const noexcept 
+    {//virtual const std::string* GetError() const noexcept 
+        return "see \"Other\" section for details";
+    }
+    const std::string& GetUse () const{
+        return ptr_use_;
+    }
+
+    protected:
+    const std::string& ptr_use_;
+};
+
+
+class RestrictedCopyException : public RestrictedPtrException{
+    public:
+    RestrictedCopyException(const std::string& t) : RestrictedPtrException(t){}
+    
+    const std::string GetError() const noexcept 
+    //const std::string* GetError() const noexcept 
+    {
+        std::stringstream ss;
+        ss<<"<"<<this->GetUse()<<">: Too many copies of RestrictedPtr!";
+        std::string s=ss.str();
+        return s;
+        //return &s;
+        //return "<use>: Too many copies of RestrictedPtr!";
+    }
+};
+
+class RestrictedNullException : public RestrictedPtrException{
+    public:
+    RestrictedNullException(const std::string& t) : RestrictedPtrException(t){}
+    
+    const std::string GetError() const noexcept 
+    //const std::string* GetError() const noexcept 
+    {
+        std::stringstream ss;
+        ss<<"<"<<this->GetUse()<<">: nullptr exception!";
+        std::string s=ss.str();
+        return s;
+        //return &s;
+        //return "<use>: nullptr exception!";
+    }
+};
+
+}
+
+
+#endif
