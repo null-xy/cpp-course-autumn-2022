@@ -49,7 +49,7 @@ class RestrictedPtr{
             throw RestrictedNullException(ptr_use_); 
         }else{
             counter_ = new int(1);
-            ptr_use_="nullptr";
+            ptr_use_=*ptr;
         }
         //counter_ = new int(1);
         //ptr_use_="nullptr";
@@ -110,7 +110,7 @@ class RestrictedPtr{
         }
         return *this;
     }
-    T& GetData(){
+    T& GetData() const{
         if(this->ptr==nullptr){
             throw RestrictedNullException(ptr_use_);
         }else{
