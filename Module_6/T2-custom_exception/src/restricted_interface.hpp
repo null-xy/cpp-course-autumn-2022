@@ -32,7 +32,6 @@ using namespace WeirdMemoryAllocator;
 template <typename T>
     RestrictedPtr<T> MakeRestricted(T* p) noexcept{
         RestrictedPtr<T> new_p(p,"default");
-        //delete p;
         return new_p;
         /*const void * address = static_cast<const void*>(p);
         std::stringstream ss;
@@ -58,7 +57,8 @@ template <typename T>
             std::cout << copyex.GetError() << std::endl;
             T* temp=new T(other_p.GetData());
             RestrictedPtr<T> new_p1(temp,"default");
-            return new_p1;        
+            //delete temp;
+            return new_p1;
         }
         /*catch(RestrictedNullException& nullex){
             std::cout << nullex.GetError() << std::endl;
@@ -73,7 +73,6 @@ template <typename T>
         try{
             os<<p.GetData()<< std::endl;
         }catch(RestrictedNullException &nullex){
-            //std::cout << nullex.GetError() << std::endl;
             os<<nullex.GetError() << std::endl;
         }
         /*os<<p.GetData();

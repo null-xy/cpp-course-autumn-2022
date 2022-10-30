@@ -52,10 +52,11 @@ class TranscriptRegistry{
     TranscriptRegistry(){}
     void Add(const Transcript& trans);
     void RemoveById(const std::string& id);
+    std::list<Transcript>::iterator FindTranscript(const std::string& id);
     //std::list<std::pair<std::string, size_t>>::
     //iterator FindTranscript(const std::string& id);
-    std::list<std::pair<std::string,std::string>> FindCourseResults(const std::string& course);
-    std::list<std::string> GetTranscripts();
+    std::list<std::pair<std::string, size_t>> FindCourseResults(const std::string& course);
+    std::list<Transcript> GetTranscripts();
 
     private:
     std::list<Transcript> registry_;
