@@ -104,6 +104,7 @@ class RestrictedPtr{
             (*other.counter_)++;
             ptr=other.ptr;
             counter_=other.counter_;
+            ptr_use_=other.ptr_use_;
             //ptr_use_=*ptr;
         }else{
             //ptr = nullptr;

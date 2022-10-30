@@ -32,12 +32,12 @@ using namespace WeirdMemoryAllocator;
 template <typename T>
     RestrictedPtr<T> MakeRestricted(T* p) noexcept{
         RestrictedPtr<T> new_p(p,"default");
+        delete p;
         return new_p;
         /*const void * address = static_cast<const void*>(p);
         std::stringstream ss;
         ss << address;
         std::string address_str = ss.str();*/
-        //delete p;
         //p=reinterpret_cast<RestrictedPtr<T>>(new_p);
         //new_p.counter_= new int(1);
         //new_p.ptr_use_=*ptr;
