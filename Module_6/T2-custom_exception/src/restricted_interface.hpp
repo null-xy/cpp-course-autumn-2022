@@ -55,7 +55,7 @@ template <typename T>
             //using std::swap;
             //swap(new_p,other_p);
             //return other_p;
-            return new_p;
+            //return new_p;
         }
         catch(RestrictedCopyException& copyex){
             std::cout << copyex.GetError() << std::endl;            
