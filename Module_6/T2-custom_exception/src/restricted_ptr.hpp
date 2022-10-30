@@ -29,6 +29,7 @@
 #include <iostream>
 #include <memory>
 #include <exception>
+#include <sstream>
 #include "restricted_ptr_ex.hpp"
 
 namespace WeirdMemoryAllocator{
@@ -36,40 +37,81 @@ template <class T>
 class RestrictedPtr{
     public:
     std::shared_ptr<T> ptr;
+    //T* ptr;
     int* counter_;
     std::string ptr_use_;
+    //T ptr_use_;
     
     RestrictedPtr():ptr(nullptr){ 
+        //throw RestrictedNullException(ptr_use_); 
         counter_ = new int(1);
         ptr_use_="nullptr";
     }
 
     RestrictedPtr(T* p):ptr(p){
-        if(p==nullptr){
-            throw RestrictedNullException(ptr_use_); 
-        }else{
+       // if(p==nullptr){
+       //     throw RestrictedNullException(ptr_use_); 
+       // }else{
+            //this->ptr=p;
+            /*const void * address = static_cast<const void*>(p);
+            std::stringstream ss;
+            ss << address;
+            std::string address_str = ss.str();
+            ptr_use_=address_str;*/
+            ptr_use_="default";
             counter_ = new int(1);
-            ptr_use_=*ptr;
-        }
+        //}
         //counter_ = new int(1);
         //ptr_use_="nullptr";
     }
+    
+    RestrictedPtr(T* p, std::string str):ptr(p){
+        if(p==nullptr){
+            throw RestrictedNullException(ptr_use_); 
+        }else{
+            /*const void * address = static_cast<const void*>(p);
+            std::stringstream ss;
+            ss << address;
+            std::string address_str = ss.str();
+            */
+            ptr_use_=str;
+            counter_ = new int(1);
 
-    RestrictedPtr(T* p,std::string str):ptr(p),ptr_use_(str){
-        if(p==nullptr){
-            throw RestrictedNullException(ptr_use_); 
-        }else{
-            counter_ = new int(1);
-            //ptr_use_="nullptr";
         }
         //counter_ = new int(1);
         //ptr_use_="nullptr";
     }
+/*
+    RestrictedPtr(T* p):ptr(p),counter_(new int(1)),ptr_use_(str){
+        if(p==nullptr){
+            throw RestrictedNullException(ptr_use_); 
+        }else{
+            const void * address = static_cast<const void*>(p);
+            std::stringstream ss;
+            ss << address;
+            std::string address_str = ss.str(); 
+            //counter_ = ;
+             ptr_use_=address_str;
+        }
+        //counter_ = new int(1);
+        //ptr_use_="nullptr";
+    }*/
 
     //RestrictedPtr(std::nullptr_t, const char [17])
 
     RestrictedPtr(RestrictedPtr<T> &other){
-        if((*other.counter_)>=3){
+        if((other.GetRefCount())<3){
+            (*other.counter_)++;
+            ptr=other.ptr;
+            counter_=other.counter_;
+            //ptr_use_=*ptr;
+        }else{
+            //ptr = nullptr;
+            //counter_ = new int(1);
+            throw RestrictedCopyException(ptr_use_);
+        }
+        }
+        /*if((*other.counter_)>=3){
             throw RestrictedCopyException(ptr_use_);
             //ptr = nullptr;
             //counter_ = new int(1);
@@ -78,7 +120,7 @@ class RestrictedPtr{
             ptr=other.ptr;
             counter_=other.counter_;
             ptr_use_=other.ptr_use_;
-        }
+        }*/
         /*if((*t.counter_)<3){
             (*t.counter_)++;
             ptr=t.ptr;
@@ -88,7 +130,7 @@ class RestrictedPtr{
             counter_ = new int(1);
         }
         */
-    }
+
     ~RestrictedPtr(){
         if((*counter_)>1){
             (*counter_)--;
@@ -100,8 +142,9 @@ class RestrictedPtr{
     RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
         if((*other.counter_)>=3){
             throw RestrictedCopyException(ptr_use_);
-            //ptr = nullptr;
-            //counter_ = new int(1);
+            /*ptr = nullptr;
+            counter_ = new int(1);
+            ptr_use_="nullptr";*/
         }else{
             (*other.counter_)++;
             ptr=other.ptr;
@@ -110,27 +153,32 @@ class RestrictedPtr{
         }
         return *this;
     }
-    T& GetData() const{
+    //T& GetData() const{
+    T& GetData() {
         if(this->ptr==nullptr){
             throw RestrictedNullException(ptr_use_);
+
         }else{
-            return *ptr.get();
+            //return *ptr.get();
+            return *ptr;
         }
     }
 
-    T* GetPointer() const {
+    T* GetPointer() {
         if(ptr==nullptr){
             return nullptr;
         }else{
-            return ptr.get();            
+            return ptr.get();
         }
     }
     int GetRefCount() const {
         return *this->counter_;
+        //return counter_;
     }
     void Release(){
         if(this->GetRefCount()==0){
             delete counter_;
+            //delete ptr;
         }
     }
 

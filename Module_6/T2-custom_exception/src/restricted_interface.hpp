@@ -30,30 +30,42 @@ using namespace WeirdMemoryAllocator;
 
 //WeirdMemoryAllocator::RestrictedPtr<int> &MakeRestricted<int>(int *p)
 template <typename T>
-    RestrictedPtr<T>& MakeRestricted(T* p){
-        RestrictedPtr<T> new_p(p);
-        //delete p;
+    RestrictedPtr<T>& MakeRestricted(T* p) noexcept{
+        RestrictedPtr<T> new_p(p,"default");
         return new_p;
+        /*const void * address = static_cast<const void*>(p);
+        std::stringstream ss;
+        ss << address;
+        std::string address_str = ss.str();*/
+        //delete p;
+        //p=reinterpret_cast<RestrictedPtr<T>>(new_p);
+        //new_p.counter_= new int(1);
+        //new_p.ptr_use_=*ptr;
+        //RestrictedPtr<T> new_p = p;
+        //return std::shared_ptr<T>(new_p,p);
     }
 
 template <typename T>
-    RestrictedPtr<T>& CopyRestricted(RestrictedPtr<T>& p){
+    RestrictedPtr<T>& CopyRestricted(RestrictedPtr<T>& other_p){
         try{
-            RestrictedPtr<T> new_p = p;
+            RestrictedPtr<T>& new_p = other_p;
+            //using std::swap;
+            //swap(new_p,other_p);
+            //return other_p;
             return new_p;
         }
         catch(RestrictedCopyException& copyex){
             std::cout << copyex.GetError() << std::endl;
         }
-        catch(RestrictedNullException& nullex){
+        /*catch(RestrictedNullException& nullex){
             std::cout << nullex.GetError() << std::endl;
-        }
+        }*/
         //RestrictedPtr<T> new_p = p;
         //return new_p;
     }
 
 template <typename T>
-    std::ostream &operator<<(std::ostream& os, RestrictedPtr<T>& p){
+    std::ostream& operator<<(std::ostream& os, RestrictedPtr<T>& p){
         try{
             os<<p.GetData();
             return os;
