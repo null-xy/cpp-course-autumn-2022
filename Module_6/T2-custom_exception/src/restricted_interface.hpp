@@ -56,7 +56,7 @@ template <typename T>
         }
         catch(RestrictedCopyException& copyex){
             std::cout << copyex.GetError() << std::endl;
-            //RestrictedPtr<T> default_p(other_p,"default");
+            //RestrictedPtr<T> default_p(other_p.GetPointer(),"default");
             //return default_p;
         }
         /*catch(RestrictedNullException& nullex){
@@ -70,12 +70,13 @@ template <typename T>
     std::ostream& operator<<(std::ostream& os, RestrictedPtr<T>& p){
         try{
             os<<p.GetData();
-            return os;
         }catch(RestrictedNullException &nullex){
-            std::cout << nullex.GetError() << std::endl;
+            //std::cout << nullex.GetError() << std::endl;
+            os<<nullex.GetError() << std::endl;
         }
         /*os<<p.GetData();
         return os;*/
+        return os;
     }
 
 #endif
