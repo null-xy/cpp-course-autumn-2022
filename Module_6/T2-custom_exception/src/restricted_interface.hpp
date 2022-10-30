@@ -50,7 +50,6 @@ template <typename T>
             T* temp=new T(other_p.GetData());
             RestrictedPtr<T> new_p(temp,"default");
         try{
-            new_p.Release();
             RestrictedPtr<T> new_p = other_p;
             //using std::swap;
             //swap(new_p,other_p);
