@@ -46,9 +46,9 @@ template <typename T>
     }
 
 template <typename T>
-    RestrictedPtr<T>& CopyRestricted(RestrictedPtr<T>& other_p){
+    RestrictedPtr<T> CopyRestricted(RestrictedPtr<T>& other_p){
         try{
-            RestrictedPtr<T>& new_p = other_p;
+            RestrictedPtr<T> new_p = other_p;
             //using std::swap;
             //swap(new_p,other_p);
             //return other_p;
@@ -74,6 +74,6 @@ template <typename T>
         }
         /*os<<p.GetData();
         return os;*/
-    };
+    }
 
 #endif
