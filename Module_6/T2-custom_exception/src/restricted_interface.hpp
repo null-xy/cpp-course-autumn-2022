@@ -71,7 +71,7 @@ template <typename T>
 template <typename T>
     std::ostream& operator<<(std::ostream& os, RestrictedPtr<T>& p){
         try{
-            os<<p.GetData();
+            os<<p.GetData()<< std::endl;
         }catch(RestrictedNullException &nullex){
             //std::cout << nullex.GetError() << std::endl;
             os<<nullex.GetError() << std::endl;
