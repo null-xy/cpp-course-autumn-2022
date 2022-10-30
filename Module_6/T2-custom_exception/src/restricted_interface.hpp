@@ -56,8 +56,8 @@ template <typename T>
         }
         catch(RestrictedCopyException& copyex){
             std::cout << copyex.GetError() << std::endl;
-            RestrictedPtr<T> default_p(other_p,"default");
-            return default_p;
+            //RestrictedPtr<T> default_p(other_p,"default");
+            //return default_p;
         }
         /*catch(RestrictedNullException& nullex){
             std::cout << nullex.GetError() << std::endl;
