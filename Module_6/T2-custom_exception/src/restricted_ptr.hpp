@@ -36,8 +36,8 @@ namespace WeirdMemoryAllocator{
 template <class T>
 class RestrictedPtr{
     public:
-    std::shared_ptr<T> ptr;
-    //T* ptr;
+    //std::shared_ptr<T> ptr;
+    T* ptr;
     int* counter_;
     std::string ptr_use_;
     //T ptr_use_;
@@ -162,8 +162,8 @@ class RestrictedPtr{
             throw RestrictedNullException(this->ptr_use_);
 
         }else{
-            return *ptr.get();
-            //return *ptr;
+            //return *ptr.get();
+            return *ptr;
         }
     }
 

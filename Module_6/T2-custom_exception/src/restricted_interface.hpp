@@ -47,6 +47,7 @@ template <typename T>
 
 template <typename T>
     RestrictedPtr<T> CopyRestricted(RestrictedPtr<T>& other_p){
+
         try{
             RestrictedPtr<T> new_p = other_p;
             //using std::swap;
@@ -56,8 +57,8 @@ template <typename T>
         }
         catch(RestrictedCopyException& copyex){
             std::cout << copyex.GetError() << std::endl;
-            //RestrictedPtr<T> default_p(other_p.GetPointer(),"default");
-            //return default_p;
+            RestrictedPtr<T> default_p(other_p.ptr,"default");
+            return default_p;
         }
         /*catch(RestrictedNullException& nullex){
             std::cout << nullex.GetError() << std::endl;
