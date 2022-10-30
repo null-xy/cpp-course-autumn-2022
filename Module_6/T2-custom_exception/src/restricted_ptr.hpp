@@ -39,7 +39,7 @@ class RestrictedPtr{
     std::shared_ptr<T> ptr;
     //T* ptr;
     int* counter_;
-    std::string* ptr_use_;
+    std::string ptr_use_;
     //T ptr_use_;
     
     RestrictedPtr():ptr(nullptr){ 
@@ -109,7 +109,8 @@ class RestrictedPtr{
         }else{
             //ptr = nullptr;
             //counter_ = new int(1);
-            throw RestrictedCopyException(*other.ptr_use_);
+            //RestrictedPtr(other.GetPointer());
+            throw RestrictedCopyException(other.ptr_use_);
         }
     }
         /*if((*other.counter_)>=3){
@@ -142,7 +143,8 @@ class RestrictedPtr{
     }
     RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
         if((*other.counter_)>=3){
-            throw RestrictedCopyException(*other.ptr_use_);
+            //RestrictedPtr(other.GetPointer());
+            throw RestrictedCopyException(other.ptr_use_);
             /*ptr = nullptr;
             counter_ = new int(1);
             ptr_use_="nullptr";*/
@@ -157,7 +159,7 @@ class RestrictedPtr{
     //T& GetData() const{
     T& GetData() const{
         if(this->ptr==nullptr){
-            throw RestrictedNullException(*this->ptr_use_);
+            throw RestrictedNullException(this->ptr_use_);
 
         }else{
             return *ptr.get();
@@ -179,7 +181,6 @@ class RestrictedPtr{
     void Release(){
         if(this->GetRefCount()==0){
             delete counter_;
-            delete ptr_use_;
             //delete ptr;
         }
     }
