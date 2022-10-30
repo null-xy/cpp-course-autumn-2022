@@ -155,7 +155,7 @@ class RestrictedPtr{
         return *this;
     }
     //T& GetData() const{
-    T& GetData() {
+    T& GetData() const{
         if(this->ptr==nullptr){
             throw RestrictedNullException(this->ptr_use_);
 
