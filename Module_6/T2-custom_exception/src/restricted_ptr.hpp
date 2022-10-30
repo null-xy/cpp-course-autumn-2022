@@ -66,9 +66,9 @@ class RestrictedPtr{
     }
     
     RestrictedPtr(T* p, std::string str):ptr(p){
-        if(p==nullptr){
-            throw RestrictedNullException(ptr_use_); 
-        }else{
+        //if(p==nullptr){
+        //    throw RestrictedNullException(str); 
+        //}else{
             /*const void * address = static_cast<const void*>(p);
             std::stringstream ss;
             ss << address;
@@ -77,7 +77,7 @@ class RestrictedPtr{
             ptr_use_=str;
             counter_ = new int(1);
 
-        }
+        //}
         //counter_ = new int(1);
         //ptr_use_="nullptr";
     }
@@ -108,9 +108,9 @@ class RestrictedPtr{
         }else{
             //ptr = nullptr;
             //counter_ = new int(1);
-            throw RestrictedCopyException(ptr_use_);
+            throw RestrictedCopyException(other.ptr_use_);
         }
-        }
+    }
         /*if((*other.counter_)>=3){
             throw RestrictedCopyException(ptr_use_);
             //ptr = nullptr;
@@ -141,7 +141,7 @@ class RestrictedPtr{
     }
     RestrictedPtr<T>& operator=(const RestrictedPtr<T> &other){
         if((*other.counter_)>=3){
-            throw RestrictedCopyException(ptr_use_);
+            throw RestrictedCopyException(other.ptr_use_);
             /*ptr = nullptr;
             counter_ = new int(1);
             ptr_use_="nullptr";*/
@@ -156,7 +156,7 @@ class RestrictedPtr{
     //T& GetData() const{
     T& GetData() {
         if(this->ptr==nullptr){
-            throw RestrictedNullException(ptr_use_);
+            throw RestrictedNullException(this->ptr_use_);
 
         }else{
             return *ptr.get();

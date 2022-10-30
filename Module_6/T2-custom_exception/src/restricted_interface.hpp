@@ -74,19 +74,6 @@ template <typename T>
         }
         /*os<<p.GetData();
         return os;*/
-    }
-
-/*
-class RestrictedInterface{
-        RestrictedInterface(){};
-        virtual ~RestrictedInterface() {}
-
-        static RestrictedPtr<T>& MakeRestricted(T* p)=0;
-
-        virtual RestrictedPtr<T>& CopyRestricted(const RestrictedPtr<T>& p)=0;
-
-        virtual std::ostream &operator<<(std::ostream& os, RestrictedPtr<T>& p)=0;
-};
-*/
+    };
 
 #endif

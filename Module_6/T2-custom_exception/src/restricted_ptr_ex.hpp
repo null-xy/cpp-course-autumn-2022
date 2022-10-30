@@ -56,7 +56,7 @@ class RestrictedPtrException : public std::exception {
         return ptr_use_;
     }
 
-    private:
+    protected:
     const std::string& ptr_use_;
 };
 
@@ -69,7 +69,7 @@ class RestrictedCopyException : public RestrictedPtrException{
     //const std::string* GetError() const noexcept 
     {
         std::stringstream ss;
-        ss<<"<"<<this->GetUse()<<">: Too many copies of RestrictedPtr!";
+        ss<<this->GetUse()<<": Too many copies of RestrictedPtr!";
         std::string s=ss.str();
         return s;
         //return &s;
@@ -85,7 +85,7 @@ class RestrictedNullException : public RestrictedPtrException{
     //const std::string* GetError() const noexcept 
     {
         std::stringstream ss;
-        ss<<"<"<<this->GetUse()<<">: nullptr exception!";
+        ss<<this->GetUse()<<": nullptr exception!";
         std::string s=ss.str();
         return s;
         //return &s;
