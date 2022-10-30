@@ -143,11 +143,12 @@ class Triple{
     int val_c_;
     */
 };
-template <typename T1, typename T2, typename T3>
-bool IsHomogenous(Triple<T1,T2,T3>& t){
-//template<>
-//bool IsHomogenous(Triple<>& t){
-    if constexpr (std::is_same<T1,T2>::value & std::is_same<T2,T3>::value){
+//template <typename T1, typename T2, typename T3>
+//bool IsHomogenous(Triple<T1,T2,T3>& t){
+template<>
+bool IsHomogenous(const Triple& t){
+    //if constexpr (std::is_same<T1,T2>::value & std::is_same<T2,T3>::value){
+    if(typeid(t.val_a_).name() == typeid(t.val_b_).name()==typeid(t.val_c_).name())
         return true;
     }else {
         return false;

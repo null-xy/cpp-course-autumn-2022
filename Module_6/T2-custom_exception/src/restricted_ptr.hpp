@@ -159,8 +159,8 @@ class RestrictedPtr{
             throw RestrictedNullException(ptr_use_);
 
         }else{
-            //return *ptr.get();
-            return *ptr;
+            return *ptr.get();
+            //return *ptr;
         }
     }
 

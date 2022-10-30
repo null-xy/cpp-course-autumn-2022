@@ -30,7 +30,7 @@ using namespace WeirdMemoryAllocator;
 
 //WeirdMemoryAllocator::RestrictedPtr<int> &MakeRestricted<int>(int *p)
 template <typename T>
-    RestrictedPtr<T>& MakeRestricted(T* p) noexcept{
+    RestrictedPtr<T> MakeRestricted(T* p) noexcept{
         RestrictedPtr<T> new_p(p,"default");
         return new_p;
         /*const void * address = static_cast<const void*>(p);

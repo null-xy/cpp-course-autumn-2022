@@ -56,7 +56,7 @@ class RestrictedPtrException : public std::exception {
         return ptr_use_;
     }
 
-    protected:
+    private:
     const std::string& ptr_use_;
 };
 
