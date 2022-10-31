@@ -165,10 +165,10 @@ class RestrictedPtr{
         //return counter_;
     }
     void Release(){
-        if(this->GetRefCount()==0){
+        //if(this->GetRefCount()==0){
             delete counter_;
             //delete ptr;
-        }
+        //}
     }
 
 };
