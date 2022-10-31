@@ -108,7 +108,7 @@ class Triple{
     //const std::common_type_t<T>& Third(){
         return this->val_c_;
     }
-/*
+
     Triple(const Triple &other){
         val_a_=other.val_a_;
         val_b_=other.val_b_;
@@ -121,7 +121,7 @@ class Triple{
         val_c_=other.val_c_;
         return *this;
     }
-*/
+
     friend bool operator==(const Triple& x, const Triple& y){
         return (x.val_a_==y.val_a_ && x.val_b_==y.val_b_ && x.val_c_==y.val_c_);
     }
