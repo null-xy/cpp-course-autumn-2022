@@ -36,8 +36,8 @@ namespace WeirdMemoryAllocator{
 template <class T>
 class RestrictedPtr{
     public:
-    std::shared_ptr<T> ptr;
-    //T* ptr;
+    //std::shared_ptr<T> ptr;
+    T* ptr;
     int* counter_;
     std::string ptr_use_;
     //T ptr_use_;
@@ -53,33 +53,19 @@ class RestrictedPtr{
        //     throw RestrictedNullException(ptr_use_); 
        // }else{
             //this->ptr=p;
-            /*const void * address = static_cast<const void*>(p);
-            std::stringstream ss;
-            ss << address;
-            std::string address_str = ss.str();
-            ptr_use_=address_str;*/
             ptr_use_="default";
             counter_ = new int(1);
         //}
-        //counter_ = new int(1);
-        //ptr_use_="nullptr";
     }
     
     RestrictedPtr(T* p, std::string str):ptr(p){
         //if(p==nullptr){
         //    throw RestrictedNullException(str); 
         //}else{
-            /*const void * address = static_cast<const void*>(p);
-            std::stringstream ss;
-            ss << address;
-            std::string address_str = ss.str();
-            */
             ptr_use_=str;
             counter_ = new int(1);
-
         //}
-        //counter_ = new int(1);
-        //ptr_use_="nullptr";
+
     }
 /*
     RestrictedPtr(T* p):ptr(p),counter_(new int(1)),ptr_use_(str){
@@ -162,8 +148,8 @@ class RestrictedPtr{
             throw RestrictedNullException(this->ptr_use_);
 
         }else{
-            return *ptr.get();
-            //return *ptr;
+            //return *ptr.get();
+            return *ptr;
         }
     }
 
@@ -171,7 +157,8 @@ class RestrictedPtr{
         if(ptr==nullptr){
             return nullptr;
         }else{
-            return ptr.get();
+            //return ptr.get();
+            return ptr;
         }
     }
     int GetRefCount() const {
@@ -181,7 +168,7 @@ class RestrictedPtr{
     void Release(){
         if(this->GetRefCount()==0){
             delete counter_;
-            //delete ptr;
+            delete ptr;
         }
     }
 
