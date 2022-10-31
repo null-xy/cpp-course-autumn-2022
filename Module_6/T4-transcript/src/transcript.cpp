@@ -57,11 +57,11 @@ std::list<Transcript>::iterator TranscriptRegistry::FindTranscript(const std::st
 //std::list<Transcript>::iterator TranscriptRegistry::FindTranscript(const std::string& id){
 //std::list<std::reference_wrapper<Transcript>>::iterator TranscriptRegistry::FindTranscript(const std::string& id){
 //std::list<std::reference_wrapper<Transcript>>::iterator TranscriptRegistry::FindTranscript(const std::string& id)
-std::list<Transcript>::iterator TranscriptRegistry::FindTranscript(const std::string& id) const
+std::list<Transcript>::const_iterator TranscriptRegistry::FindTranscript(const std::string& id) const
 {
     //std::list<std::shared_ptr<Transcript>>::iterator 
     //std::list<std::reference_wrapper<Transcript>>::iterator 
-    std::list<Transcript>::iterator 
+    std::list<Transcript>::const_iterator 
     it = std::find_if(registry_.begin(),registry_.end(),[=](const Transcript& trans){
         return (trans.student_id==id);
     });
