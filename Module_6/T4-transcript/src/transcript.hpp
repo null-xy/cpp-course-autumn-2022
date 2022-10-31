@@ -60,7 +60,7 @@ class TranscriptRegistry{
     //std::list<std::reference_wrapper<Transcript>>::iterator FindTranscript(const std::string& id);
     //std::list<const Transcript>::iterator FindTranscript(const std::string& id);
 
-    std::list<std::pair<std::string, size_t>> FindCourseResults(const std::string& course);
+    std::list<std::pair<std::string, size_t>> FindCourseResults(const std::string& course) const;
 
     //std::list<Transcript*> GetTranscripts();
     //std::list<std::shared_ptr<Transcript>> GetTranscripts();

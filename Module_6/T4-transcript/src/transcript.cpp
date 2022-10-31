@@ -77,10 +77,10 @@ std::list<Transcript>::const_iterator TranscriptRegistry::FindTranscript(const s
 //std::list<std::pair<std::string, size_t>> grades; 
 /**< List of (course, grade) pairs */
 //return student id and thier grades
-std::list<std::pair<std::string, size_t>> TranscriptRegistry::FindCourseResults(const std::string& course){
+std::list<std::pair<std::string, size_t>> TranscriptRegistry::FindCourseResults(const std::string& course) const{
     std::list<std::pair<std::string, size_t>> id_grades;
-    for(std::list<Transcript>::iterator it=registry_.begin(); it!=registry_.end();it++){
-        for(std::list<std::pair<std::string, size_t>>::iterator iit=(*it).grades.begin();
+    for(auto it=registry_.begin(); it!=registry_.end();it++){
+        for(auto iit=(*it).grades.begin();
         iit!=(*it).grades.end();iit++){
             if ((*iit).first==course)
             {
