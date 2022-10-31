@@ -109,12 +109,13 @@ class Triple{
         return this->val_c_;
     }
 
+/*
     Triple(const Triple &other){
         val_a_=other.val_a_;
         val_b_=other.val_b_;
         val_c_=other.val_c_;
     }
-/*
+
     //Triple<T1,T2,T3>& operator=(const Triple<T1,T2,T3>& other){
     Triple& operator=(const Triple& other){
         val_a_=other.val_a_;
