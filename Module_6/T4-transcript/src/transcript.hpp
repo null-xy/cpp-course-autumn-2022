@@ -5,6 +5,7 @@
 #include <list>
 #include <utility>
 
+#include <memory>
 /**
  * @brief structured type for storing transcripts
  */
@@ -52,14 +53,28 @@ class TranscriptRegistry{
     TranscriptRegistry(){}
     void Add(const Transcript& trans);
     void RemoveById(const std::string& id);
+
     std::list<Transcript>::iterator FindTranscript(const std::string& id);
-    //std::list<std::pair<std::string, size_t>>::
-    //iterator FindTranscript(const std::string& id);
+    //std::list<Transcript*>::iterator FindTranscript(const std::string& id);
+    //std::list<std::shared_ptr<Transcript>>::iterator FindTranscript(const std::string& id);
+    //std::list<std::reference_wrapper<Transcript>>::iterator FindTranscript(const std::string& id);
+    //std::list<const Transcript>::iterator FindTranscript(const std::string& id);
+
     std::list<std::pair<std::string, size_t>> FindCourseResults(const std::string& course);
+
+    //std::list<Transcript*> GetTranscripts();
+    //std::list<std::shared_ptr<Transcript>> GetTranscripts();
     std::list<Transcript> GetTranscripts();
+    //std::list<std::reference_wrapper<Transcript>> GetTranscripts();
+    //std::list<const Transcript> GetTranscripts();
 
     private:
     std::list<Transcript> registry_;
+    //std::list<Transcript*> registry_;
+    //std::list<std::shared_ptr<Transcript>> registry_;
+    //std::list<std::reference_wrapper<Transcript>> registry_;
+    //std::list<const Transcript> registry_;
+    //const std::list<Transcript> registry_;
 };
 
 #endif
