@@ -55,10 +55,11 @@ template <typename T>
         }
         catch(RestrictedCopyException& copyex){
             std::cout << copyex.GetError() << std::endl;
-            T* temp=new T(other_p.GetData());
+            /*T* temp=new T(other_p.GetData());
             RestrictedPtr<T> new_p1(temp,"default");
-            //delete temp;
-            return new_p1;
+            delete temp;
+            */
+            return RestrictedPtr<T>();
         }
         /*catch(RestrictedNullException& nullex){
             std::cout << nullex.GetError() << std::endl;

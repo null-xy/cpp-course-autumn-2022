@@ -5,9 +5,9 @@ void TranscriptRegistry::Add(const Transcript& trans){
     std::shared_ptr<Transcript> new_trans = std::make_shared<Transcript>(trans);
     registry_.push_back(new_trans);
     */
-   Transcript new_trans= trans;
-    registry_.push_back(new_trans);
-    //registry_.push_back(new Transcript(trans));
+    //Transcript new_trans= trans;
+    //registry_.push_back(new_trans);
+    registry_.push_back(trans);
 }
 void TranscriptRegistry::RemoveById(const std::string& id){
     /*
@@ -67,6 +67,8 @@ std::list<Transcript>::iterator TranscriptRegistry::FindTranscript(const std::st
     if (it != registry_.end())
     {
         return it;
+    }else{
+        return registry_.end();
     }
 }
 
