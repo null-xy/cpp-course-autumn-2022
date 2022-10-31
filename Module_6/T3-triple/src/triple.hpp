@@ -132,7 +132,7 @@ class Triple{
     }
     //Triple<T1,T2,T3>& t
     friend std::ostream& operator<<(std::ostream& out,const Triple& t){
-        out<<"[<"<<t.val_a_<<">, <"<<t.val_b_<<">, <"<<t.val_c_<<">]";
+        out<<"["<<t.val_a_<<", "<<t.val_b_<<", "<<t.val_c_<<"]";
         return out;
     }
     private:
