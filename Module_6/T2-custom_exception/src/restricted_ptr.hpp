@@ -37,22 +37,29 @@ template <class T>
 class RestrictedPtr{
     public:
     std::shared_ptr<T> ptr;
-    //T* ptr;
+    //std::shared_ptr<int> counter_;
     int* counter_;
     std::string ptr_use_;
+    //T* ptr;
+    
+
     //T ptr_use_;
     
     RestrictedPtr():ptr(nullptr){ 
+    //RestrictedPtr():ptr(nullptr),counter_(new int){ 
         //throw RestrictedNullException(ptr_use_); 
+        //*counter_=1;
         counter_ = new int(1);
         ptr_use_="nullptr";
     }
 
     RestrictedPtr(T* p):ptr(p){
+    //RestrictedPtr(T* p):ptr(p),counter_(new int){
        // if(p==nullptr){
        //     throw RestrictedNullException(ptr_use_); 
        // }else{
             //this->ptr=p;
+            //*counter_=1;
             ptr_use_="default";
             counter_ = new int(1);
         //}
@@ -137,6 +144,7 @@ class RestrictedPtr{
         }else{
             (*other.counter_)++;
             ptr=other.ptr;
+            delete counter_;
             counter_=other.counter_;
             ptr_use_=other.ptr_use_;
         }
