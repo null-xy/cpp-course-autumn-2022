@@ -82,7 +82,7 @@
 
 template <typename T1, typename T2, typename T3>
 //template<class T>
-template<typename T>
+//template<typename T>
 class Triple{
     public:
     Triple(){}
