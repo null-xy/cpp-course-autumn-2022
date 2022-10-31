@@ -64,7 +64,7 @@ class TranscriptRegistry{
 
     //std::list<Transcript*> GetTranscripts();
     //std::list<std::shared_ptr<Transcript>> GetTranscripts();
-    std::list<Transcript> GetTranscripts();
+    const std::list<Transcript>& GetTranscripts() const;
     //std::list<std::reference_wrapper<Transcript>> GetTranscripts();
     //std::list<const Transcript> GetTranscripts();
 

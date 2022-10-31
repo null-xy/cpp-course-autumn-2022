@@ -9,6 +9,7 @@ void TranscriptRegistry::Add(const Transcript& trans){
     //registry_.push_back(new_trans);
     registry_.push_back(trans);
 }
+
 void TranscriptRegistry::RemoveById(const std::string& id){
     /*
     for(std::list<Transcript>::iterator it=registry_.begin(); it!=registry_.end();it++){
@@ -128,7 +129,7 @@ std::list<Transcript> TranscriptRegistry::GetTranscripts(){
 //std::list<std::shared_ptr<Transcript>> TranscriptRegistry::GetTranscripts(){
 //std::list<Transcript> TranscriptRegistry::GetTranscripts(){
 //std::list<std::reference_wrapper<Transcript>> TranscriptRegistry::GetTranscripts()
-std::list<Transcript> TranscriptRegistry::GetTranscripts()
+const std::list<Transcript>& TranscriptRegistry::GetTranscripts() const
 {
     return registry_;
     /*std::list<Transcript> return_trans;

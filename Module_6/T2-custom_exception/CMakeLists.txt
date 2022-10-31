@@ -33,5 +33,5 @@ if(MSVC)
     target_compile_options(T2-custom_exception PRIVATE /Wall)
 else()
     # gcc and clang
-    target_compile_options(T2-custom_exception PRIVATE -Wall -Wextra -pedantic -Wno-missing-field-initializers)
+    target_compile_options(T2-custom_exception PRIVATE -Wall -Wextra -pedantic -Wno-missing-field-initializers -ggdb3)
 endif()
