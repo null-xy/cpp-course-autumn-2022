@@ -54,7 +54,7 @@ class TranscriptRegistry{
     void Add(const Transcript& trans);
     void RemoveById(const std::string& id);
 
-    std::list<Transcript>::iterator FindTranscript(const std::string& id);
+    std::list<Transcript>::iterator FindTranscript(const std::string& id) const;
     //std::list<Transcript*>::iterator FindTranscript(const std::string& id);
     //std::list<std::shared_ptr<Transcript>>::iterator FindTranscript(const std::string& id);
     //std::list<std::reference_wrapper<Transcript>>::iterator FindTranscript(const std::string& id);
